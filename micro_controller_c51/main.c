@@ -7,8 +7,10 @@ uint8 Buf[]="hello world!\n";
 uint8 Received_Buf[50] = '0';
 uint16 num = 0;
 //Flags
-FAN_FLAG = 0;
-
+int FAN_FLAG = 0;
+int TIME_FLAG = 0;
+int TIME_MIN = 0;
+int TIME_SEC = 0;
 //LED
 sbit LED_DIN = P1^5;
 sbit LED_CS = P1^6;
@@ -68,7 +70,13 @@ void UART() interrupt 4 {
 	else if (Received_Buf[4] == '2') FAN_FLAG = 2;
 	else if (Received_Buf[4] == '3') FAN_FLAG = 3;
 	else FAN_FLAG = 0;
-
+	//JUDGE TIME
+	if (Received_Buf[0] > '6') TIME_FLAG = 0;
+	else TIME_FLAG = 1;
+	if (TIME_FLAG) {
+	  TIME_MIN = (Received_Buf[0] - 0x30) * 10 + Received_Buf[1];
+	  TIME_SEC = (Received_Buf[2] - 0x30) * 10 + Received_Buf[3];
+	} 
 	UART_send_string(Received_Buf);
 	for (i=49;i>0;i--)
 	  Received_Buf[i] = 0;
@@ -78,12 +86,31 @@ void UART() interrupt 4 {
     TI = 0;       
   }
 }
+//K1:STOP K2:µ÷Õû
+void key_select() {
+  if (K1 == 0) {
+    delay(10);
+	if (K1 == 0) { FAN_FLAG = 0; }
+  }
+  else if (K2 == 0) {
+  	delay(10);
+	if (K2 == 0) {
+	  FAN_FLAG ++;
+	  FAN_FLAG = FAN_FLAG % 4;
+	  if (FAN_FLAG == 0) { FAN_FLAG ++; }
+	}
+  }
+  else if (K3 == 0) {
+    delay(10);
+  }
+
+}
 
 void main() {
 	
   UART_Init();
   while (1) {
-    
+    key_select();
     switch(FAN_FLAG) {
 	  case 0: fan_stop();break;
 	  case 1: fan_low();break;
@@ -91,7 +118,6 @@ void main() {
 	  case 3: fan_high();break;
 	  default:fan_stop();break;
 	}// switch
-
 
 
   }// while

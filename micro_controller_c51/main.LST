@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   MAIN                                                                  12/23/2020 17:26:41 PAGE 1   
+C51 COMPILER V9.00   MAIN                                                                  12/24/2020 00:18:39 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
@@ -16,106 +16,134 @@ line level    source
    7          uint8 Received_Buf[50] = '0';
    8          uint16 num = 0;
    9          //Flags
-  10          FAN_FLAG = 0;
-  11          
-  12          //LED
-  13          sbit LED_DIN = P1^5;
-  14          sbit LED_CS = P1^6;
-  15          sbit LED_CLK = P1^7;
-  16          //KeyBoard
-  17          sbit K1 = P3^2;
-  18          sbit K2 = P3^3;
-  19          sbit K3 = P3^6;
-  20          sbit K4 = P3^7;
-  21          
-  22          
-  23          void UART_Init() {
-  24   1        TMOD = 0x20;
-  25   1        TMOD = 0x20; //定时器0工作模式2，自动重装8位计数器
-  26   1        TH1 = 0xfd;
-  27   1        TL1 = 0xfd;//定时器溢出时，会自动将高8位中的值赋值给低8位.比特率9600
-  28   1        TR1 = 1;
-  29   1        SM0 = 0;
-  30   1        SM1 = 1;
-  31   1        REN = 1;
-  32   1        EA = 1;
-  33   1        ES = 1;
-  34   1      }
-  35          
-  36          /*发送一个字符*/
-  37          void UART_send_byte(uint8 dat) {
-  38   1        SBUF = dat;           //把数据放到SBUF中
-  39   1        while (TI == 0);              //未发送完毕就等待
-  40   1        TI = 0;                       //发送完毕后，要把TI重新置0
-  41   1      }
-  42           
-  43          /*发送一个字符串*/
-  44          void UART_send_string(uint8 *buf) {
-  45   1        while (*buf != '\0') {
-  46   2          UART_send_byte(*buf++);
-  47   2        }
-  48   1      }
-  49          
-  50          /*异步通信中断*/
-  51          void UART() interrupt 4 {
-  52   1        if(RI == 1) {
-  53   2              int i = 0;//计数器
-  54   2              num = SBUF;  //取出数据
-  55   2              while (num != '!') {
-C51 COMPILER V9.00   MAIN                                                                  12/23/2020 17:26:41 PAGE 2   
+  10          int FAN_FLAG = 0;
+  11          int TIME_FLAG = 0;
+  12          int TIME_MIN = 0;
+  13          int TIME_SEC = 0;
+  14          //LED
+  15          sbit LED_DIN = P1^5;
+  16          sbit LED_CS = P1^6;
+  17          sbit LED_CLK = P1^7;
+  18          //KeyBoard
+  19          sbit K1 = P3^2;
+  20          sbit K2 = P3^3;
+  21          sbit K3 = P3^6;
+  22          sbit K4 = P3^7;
+  23          
+  24          
+  25          void UART_Init() {
+  26   1        TMOD = 0x20;
+  27   1        TMOD = 0x20; //定时器0工作模式2，自动重装8位计数器
+  28   1        TH1 = 0xfd;
+  29   1        TL1 = 0xfd;//定时器溢出时，会自动将高8位中的值赋值给低8位.比特率9600
+  30   1        TR1 = 1;
+  31   1        SM0 = 0;
+  32   1        SM1 = 1;
+  33   1        REN = 1;
+  34   1        EA = 1;
+  35   1        ES = 1;
+  36   1      }
+  37          
+  38          /*发送一个字符*/
+  39          void UART_send_byte(uint8 dat) {
+  40   1        SBUF = dat;           //把数据放到SBUF中
+  41   1        while (TI == 0);              //未发送完毕就等待
+  42   1        TI = 0;                       //发送完毕后，要把TI重新置0
+  43   1      }
+  44           
+  45          /*发送一个字符串*/
+  46          void UART_send_string(uint8 *buf) {
+  47   1        while (*buf != '\0') {
+  48   2          UART_send_byte(*buf++);
+  49   2        }
+  50   1      }
+  51          
+  52          /*异步通信中断*/
+  53          void UART() interrupt 4 {
+  54   1        if(RI == 1) {
+  55   2              int i = 0;//计数器
+C51 COMPILER V9.00   MAIN                                                                  12/24/2020 00:18:39 PAGE 2   
 
-  56   3                Received_Buf[i] = num;
-  57   3                RI = 0;
-  58   3                delay(1);
-  59   3                num = SBUF;
-  60   3                i++;    
-  61   3              }
-  62   2              Received_Buf[i] = '!';
-  63   2              Received_Buf[i+1] = '\0'; 
-  64   2              RI = 0;
-  65   2              //JUDGE FANS STAGE
-  66   2              if (Received_Buf[4] == '0') FAN_FLAG = 0;
-  67   2              else if (Received_Buf[4] == '1') FAN_FLAG = 1;
-  68   2              else if (Received_Buf[4] == '2') FAN_FLAG = 2;
-  69   2              else if (Received_Buf[4] == '3') FAN_FLAG = 3;
-  70   2              else FAN_FLAG = 0;
-  71   2      
-  72   2              UART_send_string(Received_Buf);
-  73   2              for (i=49;i>0;i--)
-  74   2                Received_Buf[i] = 0;
-  75   2        }
-  76   1        //如果发送完毕
-  77   1        if(TI == 1) {                                                    
-  78   2          TI = 0;       //清除标志位
-  79   2        }
-  80   1      }
-  81          
-  82          void main() {
-  83   1              
-  84   1        UART_Init();
-  85   1        while (1) {
-  86   2          
-  87   2              switch(FAN_FLAG) {
-  88   3                case 0: fan_stop();break;
-  89   3                case 1: fan_low();break;
-  90   3                case 2: fan_mid();break;
-  91   3                case 3: fan_high();break;
-  92   3                default:fan_stop();break;
-  93   3              }// switch
-  94   2      
-  95   2        }     
-  96   1      
-  97   1      
-  98   1      }// main
-  99          
+  56   2              num = SBUF;  //取出数据
+  57   2              while (num != '!') {
+  58   3                Received_Buf[i] = num;
+  59   3                RI = 0;
+  60   3                delay(1);
+  61   3                num = SBUF;
+  62   3                i++;    
+  63   3              }
+  64   2              Received_Buf[i] = '!';
+  65   2              Received_Buf[i+1] = '\0'; 
+  66   2              RI = 0;
+  67   2              //JUDGE FANS STAGE
+  68   2              if (Received_Buf[4] == '0') FAN_FLAG = 0;
+  69   2              else if (Received_Buf[4] == '1') FAN_FLAG = 1;
+  70   2              else if (Received_Buf[4] == '2') FAN_FLAG = 2;
+  71   2              else if (Received_Buf[4] == '3') FAN_FLAG = 3;
+  72   2              else FAN_FLAG = 0;
+  73   2              //JUDGE TIME
+  74   2              if (Received_Buf[0] > '6') TIME_FLAG = 0;
+  75   2              else TIME_FLAG = 1;
+  76   2              if (TIME_FLAG) {
+  77   3                TIME_MIN = (Received_Buf[0] - 0x30) * 10 + Received_Buf[1];
+  78   3                TIME_SEC = (Received_Buf[2] - 0x30) * 10 + Received_Buf[3];
+  79   3              } 
+  80   2              UART_send_string(Received_Buf);
+  81   2              for (i=49;i>0;i--)
+  82   2                Received_Buf[i] = 0;
+  83   2        }
+  84   1        //如果发送完毕，清除标志位
+  85   1        if(TI == 1) {                                                    
+  86   2          TI = 0;       
+  87   2        }
+  88   1      }
+  89          //K1:STOP K2:调整
+  90          void key_select() {
+  91   1        if (K1 == 0) {
+  92   2          delay(10);
+  93   2              if (K1 == 0) { FAN_FLAG = 0; }
+  94   2        }
+  95   1        else if (K2 == 0) {
+  96   2              delay(10);
+  97   2              if (K2 == 0) {
+  98   3                FAN_FLAG ++;
+  99   3                FAN_FLAG = FAN_FLAG % 4;
+ 100   3                if (FAN_FLAG == 0) { FAN_FLAG ++; }
+ 101   3              }
+ 102   2        }
+ 103   1        else if (K3 == 0) {
+ 104   2          delay(10);
+ 105   2        }
+ 106   1      
+ 107   1      }
+ 108          
+ 109          void main() {
+ 110   1              
+ 111   1        UART_Init();
+ 112   1        while (1) {
+ 113   2          key_select();
+ 114   2          switch(FAN_FLAG) {
+ 115   3                case 0: fan_stop();break;
+ 116   3                case 1: fan_low();break;
+ 117   3                case 2: fan_mid();break;
+C51 COMPILER V9.00   MAIN                                                                  12/24/2020 00:18:39 PAGE 3   
+
+ 118   3                case 3: fan_high();break;
+ 119   3                default:fan_stop();break;
+ 120   3              }// switch
+ 121   2      
+ 122   2      
+ 123   2        }// while
+ 124   1      }// main
+ 125          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    465    ----
+   CODE SIZE        =    617    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     68       5
+   DATA SIZE        =     74       5
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
