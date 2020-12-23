@@ -20,7 +20,7 @@ timex = 0.1   #超时设置
 def prog_exit(self):
     self.close()
 
-def data_send():
+def data_send(SCS = None):
     try:
         # DATA PROCEED
         portx = ui.comboBox_2.currentText()
@@ -44,7 +44,7 @@ def data_send():
         ser = serial.Serial(port=portx, baudrate=bps, bytesize=num_data,
                             parity=num_parity_check, stopbits=num_stop,timeout=timex)
         # WRITE
-        result = ser.write("SENDING...".encode("utf-8"))
+        result = ser.write(SCS.encode("utf-8"))
         print("写总字节数:", result)
         ser.close()  # CLOSE SERIAL
         ui.label_9.setText("连接成功！")
@@ -64,8 +64,12 @@ if __name__ == '__main__':
     ui.comboBox_5.setCurrentIndex(0)
     #Link to the menu function
     ui.actionExit.triggered.connect(prog_exit)
-    ui.actionOpen.triggered.connect(data_send)
+    ui.actionOpen.triggered.connect(lambda:data_send(SCS='99990!')) #TODO:FIX BUGS!!!!
     #Link to the button function
-    ui.pushButton.clicked.connect(data_send)
+    ui.pushButton.clicked.connect(lambda:data_send(SCS='99991!'))
+    ui.pushButton_2.clicked.connect(lambda:data_send(SCS='99993!'))   #High Speed
+    ui.pushButton_3.clicked.connect(lambda:data_send(SCS='99992!'))   #Mid Speed
+    ui.pushButton_4.clicked.connect(lambda:data_send(SCS='99991!'))   #Low Speed
+    ui.pushButton_5.clicked.connect(lambda:data_send(SCS='99990!'))   #Stop
     sys.exit(app.exec_())
 

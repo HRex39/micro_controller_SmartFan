@@ -356,6 +356,11 @@
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
             </File>
+            <File>
+              <FileName>fan.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\fan.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -1,23 +1,14 @@
 //SmartFan
 //HRex 2020/12/23
 #include <reg52.h>
-typedef unsigned char uint8;
-typedef unsigned int uint16;
+#include "fan.h"
 
 uint8 Buf[]="hello world!\n";
 uint8 Received_Buf[50] = '0';
 uint16 num = 0;
 //Flags
+FAN_FLAG = 0;
 
-//Fans
-sbit IN3 = P0^0;
-sbit IN4 = P0^1;
-sbit ENB = P0^2;
-//Light
-sbit L1 = P1^0;
-sbit L2 = P1^1;
-sbit L3 = P1^2;
-sbit L4 = P1^3;
 //LED
 sbit LED_DIN = P1^5;
 sbit LED_CS = P1^6;
@@ -28,11 +19,6 @@ sbit K2 = P3^3;
 sbit K3 = P3^6;
 sbit K4 = P3^7;
 
-void delay(uint16 n) {
-  uint16 x,y;
-  for (x=n;x>0;x--)
-  	for (y=114;y>0;y--);
-}
 
 void UART_Init() {
   TMOD = 0x20;
@@ -72,15 +58,19 @@ void UART() interrupt 4 {
 	  num = SBUF;
 	  i++;    
 	}
-	Received_Buf[i] = '!'; 
+	Received_Buf[i] = '!';
+	Received_Buf[i+1] = '\0'; 
 	RI = 0;
-	//num = SBUF;  //取出数据
-	//RI = 0;
+	//JUDGE FANS STAGE
+	if (Received_Buf[4] == '0') FAN_FLAG = 0;
+	else if (Received_Buf[4] == '1') FAN_FLAG = 1;
+	else if (Received_Buf[4] == '2') FAN_FLAG = 2;
+	else if (Received_Buf[4] == '3') FAN_FLAG = 3;
+	else FAN_FLAG = 0;
 
 	UART_send_string(Received_Buf);
 	for (i=49;i>0;i--)
 	  Received_Buf[i] = 0;
-	delay(100);
   }
   //如果发送完毕
   if(TI == 1) {							   
@@ -92,11 +82,17 @@ void main() {
 	
   UART_Init();
   while (1) {
-    L1 = 0;
-  
-  
+    
+	switch(FAN_FLAG) {
+	  case 0: fan_stop();break;
+	  case 1: fan_low();break;
+	  case 2: fan_mid();break;
+	  case 3: fan_high();break;
+	  default:fan_stop();break;
+	}// switch
+
   }	
 
 
-}
+}// main
 
