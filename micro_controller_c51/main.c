@@ -74,8 +74,8 @@ void UART() interrupt 4 {
 	if (Received_Buf[0] > '6') TIME_FLAG = 0;
 	else TIME_FLAG = 1;
 	if (TIME_FLAG) {
-	  TIME_MIN = (Received_Buf[0] - 0x30) * 10 + Received_Buf[1];
-	  TIME_SEC = (Received_Buf[2] - 0x30) * 10 + Received_Buf[3];
+	  TIME_MIN = (Received_Buf[0] - 0x30) * 10 + (Received_Buf[1]-0x30);
+	  TIME_SEC = (Received_Buf[2] - 0x30) * 10 + (Received_Buf[3]-0x30);
 	} 
 	UART_send_string(Received_Buf);
 	for (i=49;i>0;i--)
@@ -89,11 +89,11 @@ void UART() interrupt 4 {
 //K1:STOP K2:µ÷Õû
 void key_select() {
   if (K1 == 0) {
-    delay(10);
+    delay(100);
 	if (K1 == 0) { FAN_FLAG = 0; }
   }
   else if (K2 == 0) {
-  	delay(10);
+  	delay(100);
 	if (K2 == 0) {
 	  FAN_FLAG ++;
 	  FAN_FLAG = FAN_FLAG % 4;
@@ -101,7 +101,7 @@ void key_select() {
 	}
   }
   else if (K3 == 0) {
-    delay(10);
+    delay(100);
   }
 
 }
