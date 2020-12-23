@@ -186,13 +186,27 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>14</ColumnNumber>
+      <ColumnNumber>54</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>73</TopLine>
-      <CurrentLine>90</CurrentLine>
+      <TopLine>55</TopLine>
+      <CurrentLine>71</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>0</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <Focus>0</Focus>
+      <ColumnNumber>0</ColumnNumber>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\fan.h</PathWithFileName>
+      <FilenameWithoutPath>fan.h</FilenameWithoutPath>
     </File>
   </Group>
 
@@ -1541,9 +1555,15 @@
       <Documents>
         <Doc>
           <Name>.\main.c</Name>
-          <ColumnNumber>14</ColumnNumber>
-          <TopLine>73</TopLine>
-          <CurrentLine>90</CurrentLine>
+          <ColumnNumber>54</ColumnNumber>
+          <TopLine>55</TopLine>
+          <CurrentLine>71</CurrentLine>
+        </Doc>
+        <Doc>
+          <Name>FAN.H</Name>
+          <ColumnNumber>9</ColumnNumber>
+          <TopLine>30</TopLine>
+          <CurrentLine>39</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

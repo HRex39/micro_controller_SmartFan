@@ -47,6 +47,7 @@ void UART_send_string(uint8 *buf) {
   }
 }
 
+/*异步通信中断*/
 void UART() interrupt 4 {
   if(RI == 1) {
 	int i = 0;//计数器
@@ -72,9 +73,9 @@ void UART() interrupt 4 {
 	for (i=49;i>0;i--)
 	  Received_Buf[i] = 0;
   }
-  //如果发送完毕
+  //如果发送完毕，清除标志位
   if(TI == 1) {							   
-    TI = 0;       //清除标志位
+    TI = 0;       
   }
 }
 
@@ -83,7 +84,7 @@ void main() {
   UART_Init();
   while (1) {
     
-	switch(FAN_FLAG) {
+    switch(FAN_FLAG) {
 	  case 0: fan_stop();break;
 	  case 1: fan_low();break;
 	  case 2: fan_mid();break;
@@ -91,8 +92,8 @@ void main() {
 	  default:fan_stop();break;
 	}// switch
 
-  }	
 
 
+  }// while
 }// main
 

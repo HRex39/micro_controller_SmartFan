@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   MAIN                                                                  12/23/2020 14:35:36 PAGE 1   
+C51 COMPILER V9.00   MAIN                                                                  12/23/2020 17:26:41 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
@@ -56,57 +56,58 @@ line level    source
   47   2        }
   48   1      }
   49          
-  50          void UART() interrupt 4 {
-  51   1        if(RI == 1) {
-  52   2              int i = 0;//计数器
-  53   2              num = SBUF;  //取出数据
-  54   2              while (num != '!') {
-  55   3                Received_Buf[i] = num;
-C51 COMPILER V9.00   MAIN                                                                  12/23/2020 14:35:36 PAGE 2   
+  50          /*异步通信中断*/
+  51          void UART() interrupt 4 {
+  52   1        if(RI == 1) {
+  53   2              int i = 0;//计数器
+  54   2              num = SBUF;  //取出数据
+  55   2              while (num != '!') {
+C51 COMPILER V9.00   MAIN                                                                  12/23/2020 17:26:41 PAGE 2   
 
-  56   3                RI = 0;
-  57   3                delay(1);
-  58   3                num = SBUF;
-  59   3                i++;    
-  60   3              }
-  61   2              Received_Buf[i] = '!';
-  62   2              Received_Buf[i+1] = '\0'; 
-  63   2              RI = 0;
-  64   2              //JUDGE FANS STAGE
-  65   2              if (Received_Buf[4] == '0') FAN_FLAG = 0;
-  66   2              else if (Received_Buf[4] == '1') FAN_FLAG = 1;
-  67   2              else if (Received_Buf[4] == '2') FAN_FLAG = 2;
-  68   2              else if (Received_Buf[4] == '3') FAN_FLAG = 3;
-  69   2              else FAN_FLAG = 0;
-  70   2      
-  71   2              UART_send_string(Received_Buf);
-  72   2              for (i=49;i>0;i--)
-  73   2                Received_Buf[i] = 0;
-  74   2        }
-  75   1        //如果发送完毕
-  76   1        if(TI == 1) {                                                    
-  77   2          TI = 0;       //清除标志位
-  78   2        }
-  79   1      }
-  80          
-  81          void main() {
-  82   1              
-  83   1        UART_Init();
-  84   1        while (1) {
-  85   2          
-  86   2              switch(FAN_FLAG) {
-  87   3                case 0: fan_stop();break;
-  88   3                case 1: fan_low();break;
-  89   3                case 2: fan_mid();break;
-  90   3                case 3: fan_high();break;
-  91   3                default:fan_stop();break;
-  92   3              }// switch
-  93   2      
-  94   2        }     
-  95   1      
+  56   3                Received_Buf[i] = num;
+  57   3                RI = 0;
+  58   3                delay(1);
+  59   3                num = SBUF;
+  60   3                i++;    
+  61   3              }
+  62   2              Received_Buf[i] = '!';
+  63   2              Received_Buf[i+1] = '\0'; 
+  64   2              RI = 0;
+  65   2              //JUDGE FANS STAGE
+  66   2              if (Received_Buf[4] == '0') FAN_FLAG = 0;
+  67   2              else if (Received_Buf[4] == '1') FAN_FLAG = 1;
+  68   2              else if (Received_Buf[4] == '2') FAN_FLAG = 2;
+  69   2              else if (Received_Buf[4] == '3') FAN_FLAG = 3;
+  70   2              else FAN_FLAG = 0;
+  71   2      
+  72   2              UART_send_string(Received_Buf);
+  73   2              for (i=49;i>0;i--)
+  74   2                Received_Buf[i] = 0;
+  75   2        }
+  76   1        //如果发送完毕
+  77   1        if(TI == 1) {                                                    
+  78   2          TI = 0;       //清除标志位
+  79   2        }
+  80   1      }
+  81          
+  82          void main() {
+  83   1              
+  84   1        UART_Init();
+  85   1        while (1) {
+  86   2          
+  87   2              switch(FAN_FLAG) {
+  88   3                case 0: fan_stop();break;
+  89   3                case 1: fan_low();break;
+  90   3                case 2: fan_mid();break;
+  91   3                case 3: fan_high();break;
+  92   3                default:fan_stop();break;
+  93   3              }// switch
+  94   2      
+  95   2        }     
   96   1      
-  97   1      }// main
-  98          
+  97   1      
+  98   1      }// main
+  99          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

@@ -34,7 +34,7 @@ void fan_stop() {
 void fan_low() {
   L1 = 0;
   IN3 = 1;IN4 = 0;
-  delay(30);
+  delay(38);
   IN3 = 0;IN4 = 0;
   delay(70);
 }
