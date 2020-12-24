@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # Created by HRex on 2020/12/22
-import multiprocessing
+
 import sys
-import _thread
 import threading
 from time import sleep
 
@@ -51,7 +50,8 @@ def stop_time_set():
     data_send()
 
 def prog_exit(self):
-    self.close()
+    app = QApplication(sys.argv)
+    app.quit()
 
 def data_send():
     global ser

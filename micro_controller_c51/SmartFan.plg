@@ -7,3 +7,11 @@ C:\Users\ReThink\Desktop\micro_controller_SmartFan\micro_controller_c51\SmartFan
 Project File Date:  12/24/2020
 
 <h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?MAIN
+Program Size: data=94.0 xdata=0 code=1077
+creating hex file from "SmartFan"...
+"SmartFan" - 0 Error(s), 1 Warning(s).

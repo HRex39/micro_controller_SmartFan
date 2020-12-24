@@ -1,26 +1,14 @@
 //SmartFan
 //HRex 2020/12/23
 #include <reg52.h>
+#include "types.h"
 #include "fan.h"
+#include "led.h"
+#include "key.h"
 
 uint8 Buf[]="hello world!\n";
 uint8 Received_Buf[50] = '0';
 uint16 num = 0;
-//Flags
-int FAN_FLAG = 0;
-int TIME_FLAG = 0;
-int TIME_MIN = 0;
-int TIME_SEC = 0;
-//LED
-sbit LED_DIN = P1^5;
-sbit LED_CS = P1^6;
-sbit LED_CLK = P1^7;
-//KeyBoard
-sbit K1 = P3^2;
-sbit K2 = P3^3;
-sbit K3 = P3^6;
-sbit K4 = P3^7;
-
 
 void UART_Init() {
   TMOD = 0x20;
@@ -85,25 +73,6 @@ void UART() interrupt 4 {
   if(TI == 1) {							   
     TI = 0;       
   }
-}
-//K1:STOP K2:µ÷Õû
-void key_select() {
-  if (K1 == 0) {
-    delay(100);
-	if (K1 == 0) { FAN_FLAG = 0; }
-  }
-  else if (K2 == 0) {
-  	delay(100);
-	if (K2 == 0) {
-	  FAN_FLAG ++;
-	  FAN_FLAG = FAN_FLAG % 4;
-	  if (FAN_FLAG == 0) { FAN_FLAG ++; }
-	}
-  }
-  else if (K3 == 0) {
-    delay(100);
-  }
-
 }
 
 void main() {

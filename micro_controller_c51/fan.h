@@ -3,17 +3,7 @@
 //Created by HRex on 2020/12/23
 #ifndef FAN_INCLUDED
 #define FAN_INCLUDED
-typedef unsigned char uint8;
-typedef unsigned int uint16;
-
-//Fans
-sbit IN3 = P2^0;
-sbit IN4 = P2^1;
-//Light
-sbit L1 = P1^0;
-sbit L2 = P1^1;
-sbit L3 = P1^2;
-sbit L4 = P1^3;
+#include "types.h"
 
 void delay(uint16 n) {
   uint16 x,y;
@@ -22,17 +12,14 @@ void delay(uint16 n) {
 }
 
 void fan_stop() {
-  L1 = 0;
-  L2 = 0;
-  L3 = 0;
-  L4 = 0;
+  P1 = 0x07;
   IN3 = 0;
   IN4 = 0;
   delay(100);
 }
 
 void fan_low() {
-  L1 = 0;
+  P1 = 0x0E;
   IN3 = 1;IN4 = 0;
   delay(38);
   IN3 = 0;IN4 = 0;
@@ -40,8 +27,7 @@ void fan_low() {
 }
 
 void fan_mid() {
-  L1 = 0;
-  L2 = 0;
+  P1 = 0x0C;
   IN3 = 1;IN4 = 0;
   delay(50);
   IN3 = 0;IN4 = 0;
@@ -49,9 +35,7 @@ void fan_mid() {
 }
 
 void fan_high() {
-  L1 = 0;
-  L2 = 0;
-  L3 = 0;
+  P1 = 0x08;
   IN3 = 1;IN4 = 0;
   delay(90);
   IN3 = 0;IN4 = 0;
