@@ -4,6 +4,9 @@
 
 typedef unsigned char uint8;
 typedef unsigned int uint16;
+uint8 Buf[]="hello world!\n";
+uint8 Received_Buf[50] = '0';
+uint16 num = 0;
 
 //Fans
 sbit IN3 = P2^0;
@@ -19,14 +22,17 @@ int TIME_FLAG = 0;
 int TIME_MIN = 0;
 int TIME_SEC = 0;
 //LED
-sbit LED_DIN = P1^5;
-sbit LED_CS = P1^6;
-sbit LED_CLK = P1^7;
+sbit DIN   = P2^5;
+sbit LOAD  = P2^6;
+sbit CLK   = P2^7;
 //KeyBoard
 sbit K1 = P3^2;
 sbit K2 = P3^3;
 sbit K3 = P3^6;
 sbit K4 = P3^7;
+//Time Count
+int TIME_COUNT = 0;
+int SET_COUNT = 0;
 
 
 #endif // TYPES_INCLUDED

@@ -2,6 +2,7 @@
 #ifndef KEY_INCLUDED
 #define KEY_INCLUDED
 #include "types.h"
+#include "timer.h"
 
 //K1:STOP K2:µ÷Õû
 void key_select() {
@@ -21,6 +22,10 @@ void key_select() {
   }
   else if (K3 == 0) {
     delay(20);
+	if (K3 == 0) {
+	  L4 = SET_COUNT;
+	
+	}
   }
 }
 
