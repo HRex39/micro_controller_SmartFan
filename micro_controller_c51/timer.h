@@ -23,7 +23,6 @@ void TIMER0_Overflow(){
 	    else if ( TIME_MIN > 0 && TIME_SEC == 0) { TIME_SEC = 59; TIME_MIN --; }
 	    else if ( TIME_MIN > 0 && TIME_SEC > 0) { TIME_SEC --; }
 	  }
-	  //UART_send_string1(Buf);
     }
   }
 }

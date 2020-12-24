@@ -5,7 +5,8 @@
 typedef unsigned char uint8;
 typedef unsigned int uint16;
 uint8 Buf[]="hello world!\n";
-uint8 Received_Buf[50] = '0';
+uint8 Send_Buf[20] = '0';
+uint8 Received_Buf[20] = '0';
 uint16 num = 0;
 
 //Fans

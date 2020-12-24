@@ -60,7 +60,7 @@ void UART() interrupt 4 {
 	  TIME_SEC = (Received_Buf[2] - 0x30) * 10 + (Received_Buf[3]-0x30);
 	} 
 	UART_send_string(Received_Buf);
-	for (i=49;i>0;i--)
+	for (i=19;i>0;i--)
 	  Received_Buf[i] = 0;
   }
   //如果发送完毕，清除标志位
@@ -69,7 +69,14 @@ void UART() interrupt 4 {
 
 void test() {
   ES = 0;
-  UART_send_string(Buf);
+  Send_Buf[0] = (TIME_MIN / 10) + 0x30;
+  Send_Buf[1] = (TIME_MIN % 10) + 0x30;
+  Send_Buf[2] = (TIME_SEC / 10) + 0x30;
+  Send_Buf[3] = (TIME_SEC % 10) + 0x30;
+  Send_Buf[4] = FAN_FLAG + 0x30;
+  Send_Buf[5] = '!';
+  Send_Buf[6] = '\0';
+  UART_send_string(Send_Buf);
   ES = 1;
 }
 

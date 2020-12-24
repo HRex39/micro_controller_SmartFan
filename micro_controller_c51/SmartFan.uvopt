@@ -186,10 +186,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>18</ColumnNumber>
+      <ColumnNumber>10</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>14</TopLine>
-      <CurrentLine>26</CurrentLine>
+      <TopLine>15</TopLine>
+      <CurrentLine>28</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
@@ -1625,9 +1625,9 @@
       <Documents>
         <Doc>
           <Name>.\main.c</Name>
-          <ColumnNumber>18</ColumnNumber>
-          <TopLine>14</TopLine>
-          <CurrentLine>26</CurrentLine>
+          <ColumnNumber>10</ColumnNumber>
+          <TopLine>15</TopLine>
+          <CurrentLine>28</CurrentLine>
         </Doc>
         <Doc>
           <Name>FAN.H</Name>
@@ -1643,9 +1643,9 @@
         </Doc>
         <Doc>
           <Name>TYPES.H</Name>
-          <ColumnNumber>3</ColumnNumber>
-          <TopLine>18</TopLine>
-          <CurrentLine>35</CurrentLine>
+          <ColumnNumber>12</ColumnNumber>
+          <TopLine>13</TopLine>
+          <CurrentLine>23</CurrentLine>
         </Doc>
         <Doc>
           <Name>KEY.H</Name>
@@ -1661,15 +1661,15 @@
         </Doc>
         <Doc>
           <Name>TIMER.H</Name>
-          <ColumnNumber>5</ColumnNumber>
-          <TopLine>8</TopLine>
-          <CurrentLine>26</CurrentLine>
+          <ColumnNumber>4</ColumnNumber>
+          <TopLine>4</TopLine>
+          <CurrentLine>25</CurrentLine>
         </Doc>
         <Doc>
           <Name>UART.H</Name>
-          <ColumnNumber>19</ColumnNumber>
-          <TopLine>57</TopLine>
-          <CurrentLine>63</CurrentLine>
+          <ColumnNumber>29</ColumnNumber>
+          <TopLine>61</TopLine>
+          <CurrentLine>79</CurrentLine>
         </Doc>
       </Documents>
     </MDIGroup>

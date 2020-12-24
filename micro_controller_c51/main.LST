@@ -1,4 +1,4 @@
-C51 COMPILER V9.00   MAIN                                                                  12/24/2020 18:47:32 PAGE 1   
+C51 COMPILER V9.00   MAIN                                                                  12/24/2020 22:04:38 PAGE 1   
 
 
 C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
@@ -48,7 +48,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     76       5
+   DATA SIZE        =     66       5
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        12/24/2020  18:47:32  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/24/2020  22:04:40  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -30,8 +30,8 @@ LINK MAP OF MODULE:  SmartFan (?C_STARTUP)
                     0010H     0010H                  *** GAP ***
             BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
                     0020H.1   0000H.7                *** GAP ***
-            DATA    0021H     004CH     UNIT         ?DT?MAIN
-            IDATA   006DH     0001H     UNIT         ?STACK
+            DATA    0021H     0042H     UNIT         ?DT?MAIN
+            IDATA   0063H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -44,22 +44,22 @@ LINK MAP OF MODULE:  SmartFan (?C_STARTUP)
             CODE    0333H     009EH     UNIT         ?PR?TIMER0_OVERFLOW?MAIN
             CODE    03D1H     008CH     UNIT         ?C_C51STARTUP
             CODE    045DH     0064H     UNIT         ?PR?LED_OUT?MAIN
-            CODE    04C1H     0060H     UNIT         ?C_INITSEG
-            CODE    0521H     0051H     UNIT         ?PR?MAIN?MAIN
-            CODE    0572H     003AH     UNIT         ?PR?LED_INIT?MAIN
-            CODE    05ACH     0030H     UNIT         ?PR?_DELAY?MAIN
-            CODE    05DCH     0029H     UNIT         ?PR?_WRITE7219?MAIN
-            CODE    0605H     0025H     UNIT         ?PR?_UART_SEND_STRING?MAIN
-            CODE    062AH     0019H     UNIT         ?PR?FAN_MID?MAIN
-            CODE    0643H     0019H     UNIT         ?PR?FAN_HIGH?MAIN
-            CODE    065CH     0016H     UNIT         ?PR?UART_INIT?MAIN
-            CODE    0672H     000EH     UNIT         ?PR?FAN_STOP?MAIN
-            CODE    0680H     000EH     UNIT         ?PR?TEST?MAIN
-            CODE    068EH     000BH     UNIT         ?PR?TIMER0_INIT?MAIN
-            CODE    0699H     0008H     UNIT         ?PR?_UART_SEND_BYTE?MAIN
+            CODE    04C1H     0057H     UNIT         ?C_INITSEG
+            CODE    0518H     0051H     UNIT         ?PR?MAIN?MAIN
+            CODE    0569H     003AH     UNIT         ?PR?LED_INIT?MAIN
+            CODE    05A3H     0030H     UNIT         ?PR?_DELAY?MAIN
+            CODE    05D3H     0029H     UNIT         ?PR?_WRITE7219?MAIN
+            CODE    05FCH     0025H     UNIT         ?PR?_UART_SEND_STRING?MAIN
+            CODE    0621H     0019H     UNIT         ?PR?FAN_MID?MAIN
+            CODE    063AH     0019H     UNIT         ?PR?FAN_HIGH?MAIN
+            CODE    0653H     0016H     UNIT         ?PR?UART_INIT?MAIN
+            CODE    0669H     000EH     UNIT         ?PR?FAN_STOP?MAIN
+            CODE    0677H     000EH     UNIT         ?PR?TEST?MAIN
+            CODE    0685H     000BH     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    0690H     0008H     UNIT         ?PR?_UART_SEND_BYTE?MAIN
 
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 2
 
 
 
@@ -119,7 +119,7 @@ SEGMENT                              DATA_GROUP
 ?PR?UART?MAIN                      000BH    0002H
   +--> ?PR?_DELAY?MAIN
   +--> ?PR?_UART_SEND_STRING?MAIN
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 3
 
 
 
@@ -132,7 +132,7 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
 
   -------         MODULE        ?C_STARTUP
   C:03D1H         SEGMENT       ?C_C51STARTUP
-  I:006DH         SEGMENT       ?STACK
+  I:0063H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
@@ -172,60 +172,61 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   B:00A8H.7       PUBLIC        EA
+  D:0021H         PUBLIC        Send_Buf
   D:00A8H         PUBLIC        IE
-  C:05BEH         PUBLIC        _delay
+  C:05B5H         PUBLIC        _delay
   B:00A8H.4       PUBLIC        ES
   D:00B8H         PUBLIC        IP
   B:0098H.0       PUBLIC        RI
-  D:0021H         PUBLIC        TIME_COUNT
+  D:0035H         PUBLIC        TIME_COUNT
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 4
+
+
   B:0098H.1       PUBLIC        TI
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 4
-
-
-  D:0023H         PUBLIC        Buf
+  D:0037H         PUBLIC        Buf
   B:00A0H.6       PUBLIC        LOAD
-  C:0521H         PUBLIC        main
-  C:068EH         PUBLIC        TIMER0_Init
-  D:0031H         PUBLIC        Received_Buf
-  D:0063H         PUBLIC        TIME_FLAG
+  C:0518H         PUBLIC        main
+  C:0685H         PUBLIC        TIMER0_Init
+  D:0045H         PUBLIC        Received_Buf
+  D:0059H         PUBLIC        TIME_FLAG
   C:0160H         PUBLIC        key_select
   D:0099H         PUBLIC        SBUF
-  C:065CH         PUBLIC        UART_Init
+  C:0653H         PUBLIC        UART_Init
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:0643H         PUBLIC        fan_high
+  C:063AH         PUBLIC        fan_high
   C:0026H         PUBLIC        UART
-  C:0680H         PUBLIC        test
-  C:0605H         PUBLIC        _UART_send_string
+  C:0677H         PUBLIC        test
+  C:05FCH         PUBLIC        _UART_send_string
   B:00A0H.0       PUBLIC        IN3
   B:0088H.5       PUBLIC        TF0
   B:00A0H.1       PUBLIC        IN4
-  C:0572H         PUBLIC        LED_Init
+  C:0569H         PUBLIC        LED_Init
   D:008CH         PUBLIC        TH0
   D:008DH         PUBLIC        TH1
   B:0098H.7       PUBLIC        SM0
   D:008AH         PUBLIC        TL0
-  D:0065H         PUBLIC        FAN_FLAG
-  D:0067H         PUBLIC        num
+  D:005BH         PUBLIC        FAN_FLAG
+  D:005DH         PUBLIC        num
   B:0098H.6       PUBLIC        SM1
   D:008BH         PUBLIC        TL1
-  C:062AH         PUBLIC        fan_mid
+  C:0621H         PUBLIC        fan_mid
   B:0088H.4       PUBLIC        TR0
   B:0088H.6       PUBLIC        TR1
   B:0020H.0       PUBLIC        SET_COUNT
   B:00A0H.7       PUBLIC        CLK
   B:00A0H.5       PUBLIC        DIN
-  C:0672H         PUBLIC        fan_stop
-  C:0699H         PUBLIC        _UART_send_byte
-  C:05DCH         PUBLIC        _Write7219
+  C:0669H         PUBLIC        fan_stop
+  C:0690H         PUBLIC        _UART_send_byte
+  C:05D3H         PUBLIC        _Write7219
   B:0098H.4       PUBLIC        REN
   D:00C8H         PUBLIC        T2CON
   C:0003H         PUBLIC        fan_low
-  D:0069H         PUBLIC        TIME_SEC
+  D:005FH         PUBLIC        TIME_SEC
   C:0333H         PUBLIC        TIMER0_Overflow
   C:045DH         PUBLIC        led_out
-  D:006BH         PUBLIC        TIME_MIN
+  D:0061H         PUBLIC        TIME_MIN
   D:00D0H         PUBLIC        PSW
   B:00B0H.2       PUBLIC        K1
   B:00B0H.3       PUBLIC        K2
@@ -238,22 +239,22 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   D:0006H         SYMBOL        n
   -------         DO            
   D:0006H         SYMBOL        x
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 5
+
+
   D:0004H         SYMBOL        y
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 5
-
-
   -------         ENDDO         
-  C:05BEH         LINE#         8
-  C:05BEH         LINE#         10
-  C:05C7H         LINE#         11
-  C:05DBH         LINE#         12
+  C:05B5H         LINE#         8
+  C:05B5H         LINE#         10
+  C:05BEH         LINE#         11
+  C:05D2H         LINE#         12
   -------         ENDPROC       _DELAY
   -------         PROC          FAN_STOP
-  C:0672H         LINE#         14
-  C:0672H         LINE#         15
-  C:0675H         LINE#         16
-  C:0677H         LINE#         17
-  C:0679H         LINE#         18
+  C:0669H         LINE#         14
+  C:0669H         LINE#         15
+  C:066CH         LINE#         16
+  C:066EH         LINE#         17
+  C:0670H         LINE#         18
   -------         ENDPROC       FAN_STOP
   -------         PROC          FAN_LOW
   C:0003H         LINE#         21
@@ -264,20 +265,20 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:0015H         LINE#         26
   -------         ENDPROC       FAN_LOW
   -------         PROC          FAN_MID
-  C:062AH         LINE#         29
-  C:062AH         LINE#         30
-  C:062DH         LINE#         31
-  C:0631H         LINE#         32
-  C:0638H         LINE#         33
-  C:063CH         LINE#         34
+  C:0621H         LINE#         29
+  C:0621H         LINE#         30
+  C:0624H         LINE#         31
+  C:0628H         LINE#         32
+  C:062FH         LINE#         33
+  C:0633H         LINE#         34
   -------         ENDPROC       FAN_MID
   -------         PROC          FAN_HIGH
-  C:0643H         LINE#         37
-  C:0643H         LINE#         38
-  C:0646H         LINE#         39
-  C:064AH         LINE#         40
-  C:0651H         LINE#         41
-  C:0655H         LINE#         42
+  C:063AH         LINE#         37
+  C:063AH         LINE#         38
+  C:063DH         LINE#         39
+  C:0641H         LINE#         40
+  C:0648H         LINE#         41
+  C:064CH         LINE#         42
   -------         ENDPROC       FAN_HIGH
   -------         PROC          _WRITE7219
   D:0007H         SYMBOL        address
@@ -285,46 +286,46 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:05DCH         LINE#         27
-  C:05DCH         LINE#         29
-  C:05DCH         LINE#         33
-  C:05DEH         LINE#         37
-  C:05E0H         LINE#         39
-  C:05E0H         LINE#         41
-  C:05E2H         LINE#         43
-  C:05E6H         LINE#         45
-  C:05EAH         LINE#         47
-  C:05ECH         LINE#         49
-  C:05F0H         LINE#         53
-  C:05F2H         LINE#         55
-  C:05F2H         LINE#         57
-  C:05F4H         LINE#         59
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 6
+  C:05D3H         LINE#         27
+  C:05D3H         LINE#         29
+  C:05D3H         LINE#         33
+  C:05D5H         LINE#         37
+  C:05D7H         LINE#         39
+  C:05D7H         LINE#         41
+  C:05D9H         LINE#         43
+  C:05DDH         LINE#         45
+  C:05E1H         LINE#         47
+  C:05E3H         LINE#         49
+  C:05E7H         LINE#         53
+  C:05E9H         LINE#         55
+  C:05E9H         LINE#         57
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 6
 
 
-  C:05F8H         LINE#         61
-  C:05FCH         LINE#         63
-  C:05FEH         LINE#         65
-  C:0602H         LINE#         67
-  C:0604H         LINE#         69
+  C:05EBH         LINE#         59
+  C:05EFH         LINE#         61
+  C:05F3H         LINE#         63
+  C:05F5H         LINE#         65
+  C:05F9H         LINE#         67
+  C:05FBH         LINE#         69
   -------         ENDPROC       _WRITE7219
   -------         PROC          LED_INIT
   -------         DO            
   D:0002H         SYMBOL        i
   -------         ENDDO         
-  C:0572H         LINE#         73
-  C:0572H         LINE#         75
-  C:0572H         LINE#         77
-  C:0575H         LINE#         79
-  C:057CH         LINE#         81
-  C:0583H         LINE#         83
-  C:058AH         LINE#         85
-  C:0591H         LINE#         87
-  C:0598H         LINE#         89
-  C:0599H         LINE#         91
-  C:0599H         LINE#         93
-  C:05A0H         LINE#         95
-  C:05ABH         LINE#         97
+  C:0569H         LINE#         73
+  C:0569H         LINE#         75
+  C:0569H         LINE#         77
+  C:056CH         LINE#         79
+  C:0573H         LINE#         81
+  C:057AH         LINE#         83
+  C:0581H         LINE#         85
+  C:0588H         LINE#         87
+  C:058FH         LINE#         89
+  C:0590H         LINE#         91
+  C:0590H         LINE#         93
+  C:0597H         LINE#         95
+  C:05A2H         LINE#         97
   -------         ENDPROC       LED_INIT
   -------         PROC          LED_OUT
   C:045DH         LINE#         99
@@ -338,36 +339,36 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:04BAH         LINE#         107
   -------         ENDPROC       LED_OUT
   -------         PROC          UART_INIT
-  C:065CH         LINE#         6
-  C:065CH         LINE#         8
-  C:065FH         LINE#         9
-  C:0662H         LINE#         10
-  C:0665H         LINE#         11
-  C:0667H         LINE#         12
-  C:0669H         LINE#         13
-  C:066BH         LINE#         14
-  C:066DH         LINE#         15
-  C:066FH         LINE#         16
-  C:0671H         LINE#         17
+  C:0653H         LINE#         6
+  C:0653H         LINE#         8
+  C:0656H         LINE#         9
+  C:0659H         LINE#         10
+  C:065CH         LINE#         11
+  C:065EH         LINE#         12
+  C:0660H         LINE#         13
+  C:0662H         LINE#         14
+  C:0664H         LINE#         15
+  C:0666H         LINE#         16
+  C:0668H         LINE#         17
   -------         ENDPROC       UART_INIT
   -------         PROC          _UART_SEND_BYTE
   D:0007H         SYMBOL        dat
-  C:0699H         LINE#         20
-  C:0699H         LINE#         21
-  C:069BH         LINE#         22
-  C:069EH         LINE#         23
-  C:06A0H         LINE#         24
+  C:0690H         LINE#         20
+  C:0690H         LINE#         21
+  C:0692H         LINE#         22
+  C:0695H         LINE#         23
+  C:0697H         LINE#         24
   -------         ENDPROC       _UART_SEND_BYTE
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 7
+
+
   -------         PROC          _UART_SEND_STRING
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 7
-
-
   D:000DH         SYMBOL        buf
-  C:0605H         LINE#         27
-  C:060BH         LINE#         28
-  C:0616H         LINE#         29
-  C:0627H         LINE#         30
-  C:0629H         LINE#         31
+  C:05FCH         LINE#         27
+  C:0602H         LINE#         28
+  C:060DH         LINE#         29
+  C:061EH         LINE#         30
+  C:0620H         LINE#         31
   -------         ENDPROC       _UART_SEND_STRING
   -------         PROC          UART
   -------         DO            
@@ -406,22 +407,22 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:0145H         LINE#         68
   -------         ENDPROC       UART
   -------         PROC          TEST
-  C:0680H         LINE#         70
-  C:0680H         LINE#         71
-  C:0682H         LINE#         72
-  C:068BH         LINE#         73
-  C:068DH         LINE#         74
+  C:0677H         LINE#         70
+  C:0677H         LINE#         71
+  C:0679H         LINE#         72
+  C:0682H         LINE#         73
+  C:0684H         LINE#         74
   -------         ENDPROC       TEST
   -------         PROC          TIMER0_INIT
-  C:068EH         LINE#         7
-  C:068EH         LINE#         8
-  C:0691H         LINE#         9
-  C:0694H         LINE#         10
-  C:0696H         LINE#         11
-  C:0698H         LINE#         12
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 8
+  C:0685H         LINE#         7
+  C:0685H         LINE#         8
+  C:0688H         LINE#         9
+  C:068BH         LINE#         10
+  C:068DH         LINE#         11
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 8
 
 
+  C:068FH         LINE#         12
   -------         ENDPROC       TIMER0_INIT
   -------         PROC          TIMER0_OVERFLOW
   C:0333H         LINE#         14
@@ -436,9 +437,9 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:038DH         LINE#         23
   C:03AEH         LINE#         24
   C:03D0H         LINE#         25
+  C:03D0H         LINE#         26
   C:03D0H         LINE#         27
   C:03D0H         LINE#         28
-  C:03D0H         LINE#         29
   -------         ENDPROC       TIMER0_OVERFLOW
   -------         PROC          KEY_SELECT
   C:0160H         LINE#         8
@@ -478,10 +479,10 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:0213H         LINE#         49
   C:0223H         LINE#         50
   C:0223H         LINE#         51
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 9
+
+
   C:0223H         LINE#         52
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 9
-
-
   C:0223H         LINE#         54
   C:0226H         LINE#         55
   C:022DH         LINE#         56
@@ -507,26 +508,26 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:027CH         LINE#         78
   -------         ENDPROC       KEY_SELECT
   -------         PROC          MAIN
-  C:0521H         LINE#         11
-  C:0521H         LINE#         12
-  C:0524H         LINE#         13
-  C:0527H         LINE#         14
-  C:052AH         LINE#         15
-  C:052AH         LINE#         16
-  C:052DH         LINE#         17
-  C:0540H         LINE#         18
-  C:0542H         LINE#         19
-  C:0547H         LINE#         20
-  C:054CH         LINE#         21
-  C:0551H         LINE#         22
-  C:0554H         LINE#         23
-  C:0554H         LINE#         24
-  C:0557H         LINE#         25
-  C:055AH         LINE#         26
-  C:056BH         LINE#         27
-  C:056DH         LINE#         28
-  C:0570H         LINE#         30
-  C:0570H         LINE#         32
+  C:0518H         LINE#         11
+  C:0518H         LINE#         12
+  C:051BH         LINE#         13
+  C:051EH         LINE#         14
+  C:0521H         LINE#         15
+  C:0521H         LINE#         16
+  C:0524H         LINE#         17
+  C:0537H         LINE#         18
+  C:0539H         LINE#         19
+  C:053EH         LINE#         20
+  C:0543H         LINE#         21
+  C:0548H         LINE#         22
+  C:054BH         LINE#         23
+  C:054BH         LINE#         24
+  C:054EH         LINE#         25
+  C:0551H         LINE#         26
+  C:0562H         LINE#         27
+  C:0564H         LINE#         28
+  C:0567H         LINE#         30
+  C:0567H         LINE#         32
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -538,10 +539,10 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:0296H         PUBLIC        ?C?IMUL
   -------         ENDMOD        ?C?IMUL
 
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 10
+
+
   -------         MODULE        ?C?SIDIV
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  18:47:32  PAGE 10
-
-
   C:02A8H         PUBLIC        ?C?SIDIV
   -------         ENDMOD        ?C?SIDIV
 
@@ -554,5 +555,5 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
     CALLER1: ?C_C51STARTUP
     CALLER2: ?PR?UART?MAIN
 
-Program Size: data=93.1 xdata=0 code=1690
+Program Size: data=83.1 xdata=0 code=1681
 LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
