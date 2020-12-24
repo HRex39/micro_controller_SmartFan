@@ -32,7 +32,7 @@ sbit K3 = P3^6;
 sbit K4 = P3^7;
 //Time Count
 int TIME_COUNT = 0;
-int SET_COUNT = 0;
+bit SET_COUNT = 0;
 
 
 #endif // TYPES_INCLUDED
