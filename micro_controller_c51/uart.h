@@ -30,6 +30,7 @@ void UART_send_string(uint8 *buf) {
   }
 }
 
+
 /*异步通信中断*/
 void UART() interrupt 4 {
   if(RI == 1) {
@@ -63,9 +64,14 @@ void UART() interrupt 4 {
 	  Received_Buf[i] = 0;
   }
   //如果发送完毕，清除标志位
-  if(TI == 1) {							   
-    TI = 0;       
-  }
+  if(TI == 1) {	TI = 0; }
 }
+
+void test() {
+  ES = 0;
+  UART_send_string(Buf);
+  ES = 1;
+}
+
 
 #endif

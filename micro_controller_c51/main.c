@@ -23,6 +23,12 @@ void main() {
 	}// switch
 	led_out();
 	TIMER0_Overflow();
+	if ( TIME_COUNT%2 == 1) {
+	  L1 = !L1;
+	  test();
+	  //UART_send_string(Buf);
+	}
+
   }// while
 }// main
 
