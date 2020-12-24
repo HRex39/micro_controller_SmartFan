@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Created by HRex on 2020/12/22
-
+import re
 import sys
 import threading
 from time import sleep
@@ -26,6 +26,9 @@ SERIAL_STATUS = 0
 # Status Variable
 control_stage = 0
 time_stage = "9999"
+min_stage = "00"
+sec_stage = "00"
+fan_stage = 0
 # Variable ends
 
 def high_speed_set():
@@ -44,6 +47,28 @@ def stop_time_set():
     global time_stage
     time = ui.timeEdit.time().toString()
     time_stage = str(time[3]+time[4]+time[6]+time[7])
+def data_from_c51_set(data):
+    global min_stage,sec_stage,fan_stage
+    find_data = re.findall('(?<=!).*?(?=!)',data)
+    current_stage = int(find_data[-1])
+    if int(current_stage / 100) <= 60:
+        fan_stage = int(current_stage % 10)
+        current_stage = int(current_stage / 10)
+        min_stage = int(current_stage / 100)
+        sec_stage = int(current_stage % 100)
+    else:
+        fan_stage = int(current_stage % 10)
+        min_stage = 0
+        sec_stage = 0
+
+    if fan_stage == 0:
+        ui.label_13.setText("STOP")
+    elif fan_stage == 1:
+        ui.label_13.setText("LOW")
+    elif fan_stage == 2:
+        ui.label_13.setText("MID")
+    elif fan_stage == 3:
+        ui.label_13.setText("HIGH")
 
 def prog_exit(self):
     app = QApplication(sys.argv)
@@ -53,8 +78,7 @@ def data_clear():
     ui.textBrowser.clear()
 
 def data_send():
-    global ser
-    global SERIAL_STATUS
+    global ser, SERIAL_STATUS
     if SERIAL_STATUS == 1:
         try:
             SCS = time_stage + str(control_stage) + "!"
@@ -70,8 +94,7 @@ def data_send():
         ui.label_11.setText("串口未开启，发送失败！")
 
 def data_received(thread_name):
-    global ser
-    global SERIAL_STATUS
+    global ser, SERIAL_STATUS
     while True:
         if SERIAL_STATUS == 1:
             ui.label_10.setText("串口已开启，准备接收")
@@ -80,18 +103,17 @@ def data_received(thread_name):
                     data_from_c51 = ser.read(ser.in_waiting).decode("utf-8")
                     sleep(0.02)
                     print(data_from_c51)
+                    data_from_c51_set(data_from_c51)
                     ui.textBrowser.insertPlainText(data_from_c51)
-
             except Exception as e:
                 ui.label_10.setText("ERROR!!!!")
             data_from_c51 = None
         else:
             ui.label_10.setText("串口未开启，接收失败")
-
+        ui.lcdNumber_3.display(str(min_stage) + ":" + str(sec_stage))
 
 def serial_open():
-    global ser
-    global SERIAL_STATUS
+    global ser, SERIAL_STATUS
     if SERIAL_STATUS == 0:
         try:
             # DATA PROCEED
@@ -132,6 +154,9 @@ def serial_open():
             ui.label_9.setText("关闭失败")
             SERIAL_STATUS = 1
 
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     MainWindow = QMainWindow()
@@ -146,6 +171,7 @@ if __name__ == '__main__':
     ui.comboBox_3.setCurrentIndex(0)
     ui.comboBox_4.setCurrentIndex(3)
     ui.comboBox_5.setCurrentIndex(0)
+    ui.lcdNumber_3.setDigitCount(5)
     # Set Maxium Time
     ui.timeEdit.setDisplayFormat("mm:ss")
     ui.timeEdit.setMinimumTime(QTime(00,00,15))
