@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        12/24/2020  22:04:40  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/25/2020  11:43:11  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -26,8 +26,8 @@ LINK MAP OF MODULE:  SmartFan (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0008H     UNIT         _DATA_GROUP_
-                    0010H     0010H                  *** GAP ***
+            DATA    0008H     0005H     UNIT         _DATA_GROUP_
+                    000DH     0013H                  *** GAP ***
             BIT     0020H.0   0000H.1   UNIT         ?BI?MAIN
                     0020H.1   0000H.7                *** GAP ***
             DATA    0021H     0042H     UNIT         ?DT?MAIN
@@ -38,28 +38,28 @@ LINK MAP OF MODULE:  SmartFan (?C_STARTUP)
             CODE    0003H     0019H     UNIT         ?PR?FAN_LOW?MAIN
                     001CH     0007H                  *** GAP ***
             CODE    0023H     0003H     ABSOLUTE     
-            CODE    0026H     013AH     UNIT         ?PR?UART?MAIN
-            CODE    0160H     011DH     UNIT         ?PR?KEY_SELECT?MAIN
-            CODE    027DH     00B6H     UNIT         ?C?LIB_CODE
-            CODE    0333H     009EH     UNIT         ?PR?TIMER0_OVERFLOW?MAIN
-            CODE    03D1H     008CH     UNIT         ?C_C51STARTUP
-            CODE    045DH     0064H     UNIT         ?PR?LED_OUT?MAIN
-            CODE    04C1H     0057H     UNIT         ?C_INITSEG
-            CODE    0518H     0051H     UNIT         ?PR?MAIN?MAIN
-            CODE    0569H     003AH     UNIT         ?PR?LED_INIT?MAIN
-            CODE    05A3H     0030H     UNIT         ?PR?_DELAY?MAIN
-            CODE    05D3H     0029H     UNIT         ?PR?_WRITE7219?MAIN
-            CODE    05FCH     0025H     UNIT         ?PR?_UART_SEND_STRING?MAIN
-            CODE    0621H     0019H     UNIT         ?PR?FAN_MID?MAIN
-            CODE    063AH     0019H     UNIT         ?PR?FAN_HIGH?MAIN
-            CODE    0653H     0016H     UNIT         ?PR?UART_INIT?MAIN
-            CODE    0669H     000EH     UNIT         ?PR?FAN_STOP?MAIN
-            CODE    0677H     000EH     UNIT         ?PR?TEST?MAIN
-            CODE    0685H     000BH     UNIT         ?PR?TIMER0_INIT?MAIN
-            CODE    0690H     0008H     UNIT         ?PR?_UART_SEND_BYTE?MAIN
+            CODE    0026H     012CH     UNIT         ?PR?UART?MAIN
+            CODE    0152H     011DH     UNIT         ?PR?KEY_SELECT?MAIN
+            CODE    026FH     00B6H     UNIT         ?C?LIB_CODE
+            CODE    0325H     009EH     UNIT         ?PR?TIMER0_OVERFLOW?MAIN
+            CODE    03C3H     008CH     UNIT         ?C_C51STARTUP
+            CODE    044FH     0064H     UNIT         ?PR?LED_OUT?MAIN
+            CODE    04B3H     005CH     UNIT         ?PR?TEST?MAIN
+            CODE    050FH     0057H     UNIT         ?C_INITSEG
+            CODE    0566H     0051H     UNIT         ?PR?MAIN?MAIN
+            CODE    05B7H     003AH     UNIT         ?PR?LED_INIT?MAIN
+            CODE    05F1H     0030H     UNIT         ?PR?_DELAY?MAIN
+            CODE    0621H     0029H     UNIT         ?PR?_WRITE7219?MAIN
+            CODE    064AH     0025H     UNIT         ?PR?_UART_SEND_STRING?MAIN
+            CODE    066FH     0019H     UNIT         ?PR?FAN_MID?MAIN
+            CODE    0688H     0019H     UNIT         ?PR?FAN_HIGH?MAIN
+            CODE    06A1H     0016H     UNIT         ?PR?UART_INIT?MAIN
+            CODE    06B7H     000EH     UNIT         ?PR?FAN_STOP?MAIN
+            CODE    06C5H     000BH     UNIT         ?PR?TIMER0_INIT?MAIN
+            CODE    06D0H     0008H     UNIT         ?PR?_UART_SEND_BYTE?MAIN
 
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 2
 
 
 
@@ -111,16 +111,15 @@ SEGMENT                              DATA_GROUP
 ?PR?TEST?MAIN                      -----    -----
   +--> ?PR?_UART_SEND_STRING?MAIN
 
-?PR?_UART_SEND_STRING?MAIN         000DH    0003H
+?PR?_UART_SEND_STRING?MAIN         0008H    0003H
   +--> ?PR?_UART_SEND_BYTE?MAIN
 
 *** NEW ROOT ***************************************************
 
 ?PR?UART?MAIN                      000BH    0002H
   +--> ?PR?_DELAY?MAIN
-  +--> ?PR?_UART_SEND_STRING?MAIN
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 3
 
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 3
 
 
 
@@ -131,7 +130,7 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:03D1H         SEGMENT       ?C_C51STARTUP
+  C:03C3H         SEGMENT       ?C_C51STARTUP
   I:0063H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
@@ -141,7 +140,7 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:03D4H         SYMBOL        IDATALOOP
+  C:03C6H         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -150,18 +149,18 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:03D1H         SYMBOL        STARTUP1
+  C:03C3H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:03D1H         LINE#         133
-  C:03D3H         LINE#         134
-  C:03D4H         LINE#         135
-  C:03D5H         LINE#         136
-  C:03D7H         LINE#         185
-  C:03DAH         LINE#         196
+  C:03C3H         LINE#         133
+  C:03C5H         LINE#         134
+  C:03C6H         LINE#         135
+  C:03C7H         LINE#         136
+  C:03C9H         LINE#         185
+  C:03CCH         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        MAIN
@@ -174,35 +173,35 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   B:00A8H.7       PUBLIC        EA
   D:0021H         PUBLIC        Send_Buf
   D:00A8H         PUBLIC        IE
-  C:05B5H         PUBLIC        _delay
+  C:0603H         PUBLIC        _delay
   B:00A8H.4       PUBLIC        ES
   D:00B8H         PUBLIC        IP
   B:0098H.0       PUBLIC        RI
   D:0035H         PUBLIC        TIME_COUNT
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 4
-
-
   B:0098H.1       PUBLIC        TI
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 4
+
+
   D:0037H         PUBLIC        Buf
   B:00A0H.6       PUBLIC        LOAD
-  C:0518H         PUBLIC        main
-  C:0685H         PUBLIC        TIMER0_Init
+  C:0566H         PUBLIC        main
+  C:06C5H         PUBLIC        TIMER0_Init
   D:0045H         PUBLIC        Received_Buf
   D:0059H         PUBLIC        TIME_FLAG
-  C:0160H         PUBLIC        key_select
+  C:0152H         PUBLIC        key_select
   D:0099H         PUBLIC        SBUF
-  C:0653H         PUBLIC        UART_Init
+  C:06A1H         PUBLIC        UART_Init
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
-  C:063AH         PUBLIC        fan_high
+  C:0688H         PUBLIC        fan_high
   C:0026H         PUBLIC        UART
-  C:0677H         PUBLIC        test
-  C:05FCH         PUBLIC        _UART_send_string
+  C:04B3H         PUBLIC        test
+  C:064AH         PUBLIC        _UART_send_string
   B:00A0H.0       PUBLIC        IN3
   B:0088H.5       PUBLIC        TF0
   B:00A0H.1       PUBLIC        IN4
-  C:0569H         PUBLIC        LED_Init
+  C:05B7H         PUBLIC        LED_Init
   D:008CH         PUBLIC        TH0
   D:008DH         PUBLIC        TH1
   B:0098H.7       PUBLIC        SM0
@@ -211,21 +210,21 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   D:005DH         PUBLIC        num
   B:0098H.6       PUBLIC        SM1
   D:008BH         PUBLIC        TL1
-  C:0621H         PUBLIC        fan_mid
+  C:066FH         PUBLIC        fan_mid
   B:0088H.4       PUBLIC        TR0
   B:0088H.6       PUBLIC        TR1
   B:0020H.0       PUBLIC        SET_COUNT
   B:00A0H.7       PUBLIC        CLK
   B:00A0H.5       PUBLIC        DIN
-  C:0669H         PUBLIC        fan_stop
-  C:0690H         PUBLIC        _UART_send_byte
-  C:05D3H         PUBLIC        _Write7219
+  C:06B7H         PUBLIC        fan_stop
+  C:06D0H         PUBLIC        _UART_send_byte
+  C:0621H         PUBLIC        _Write7219
   B:0098H.4       PUBLIC        REN
   D:00C8H         PUBLIC        T2CON
   C:0003H         PUBLIC        fan_low
   D:005FH         PUBLIC        TIME_SEC
-  C:0333H         PUBLIC        TIMER0_Overflow
-  C:045DH         PUBLIC        led_out
+  C:0325H         PUBLIC        TIMER0_Overflow
+  C:044FH         PUBLIC        led_out
   D:0061H         PUBLIC        TIME_MIN
   D:00D0H         PUBLIC        PSW
   B:00B0H.2       PUBLIC        K1
@@ -233,28 +232,28 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   B:0090H.0       PUBLIC        L1
   B:00B0H.6       PUBLIC        K3
   B:0090H.1       PUBLIC        L2
-  -------         PROC          L?0119
-  -------         ENDPROC       L?0119
+  -------         PROC          L?0121
+  -------         ENDPROC       L?0121
   -------         PROC          _DELAY
   D:0006H         SYMBOL        n
   -------         DO            
   D:0006H         SYMBOL        x
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 5
-
-
   D:0004H         SYMBOL        y
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 5
+
+
   -------         ENDDO         
-  C:05B5H         LINE#         8
-  C:05B5H         LINE#         10
-  C:05BEH         LINE#         11
-  C:05D2H         LINE#         12
+  C:0603H         LINE#         8
+  C:0603H         LINE#         10
+  C:060CH         LINE#         11
+  C:0620H         LINE#         12
   -------         ENDPROC       _DELAY
   -------         PROC          FAN_STOP
-  C:0669H         LINE#         14
-  C:0669H         LINE#         15
-  C:066CH         LINE#         16
-  C:066EH         LINE#         17
-  C:0670H         LINE#         18
+  C:06B7H         LINE#         14
+  C:06B7H         LINE#         15
+  C:06BAH         LINE#         16
+  C:06BCH         LINE#         17
+  C:06BEH         LINE#         18
   -------         ENDPROC       FAN_STOP
   -------         PROC          FAN_LOW
   C:0003H         LINE#         21
@@ -265,20 +264,20 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   C:0015H         LINE#         26
   -------         ENDPROC       FAN_LOW
   -------         PROC          FAN_MID
-  C:0621H         LINE#         29
-  C:0621H         LINE#         30
-  C:0624H         LINE#         31
-  C:0628H         LINE#         32
-  C:062FH         LINE#         33
-  C:0633H         LINE#         34
+  C:066FH         LINE#         29
+  C:066FH         LINE#         30
+  C:0672H         LINE#         31
+  C:0676H         LINE#         32
+  C:067DH         LINE#         33
+  C:0681H         LINE#         34
   -------         ENDPROC       FAN_MID
   -------         PROC          FAN_HIGH
-  C:063AH         LINE#         37
-  C:063AH         LINE#         38
-  C:063DH         LINE#         39
-  C:0641H         LINE#         40
-  C:0648H         LINE#         41
-  C:064CH         LINE#         42
+  C:0688H         LINE#         37
+  C:0688H         LINE#         38
+  C:068BH         LINE#         39
+  C:068FH         LINE#         40
+  C:0696H         LINE#         41
+  C:069AH         LINE#         42
   -------         ENDPROC       FAN_HIGH
   -------         PROC          _WRITE7219
   D:0007H         SYMBOL        address
@@ -286,274 +285,279 @@ SYMBOL TABLE OF MODULE:  SmartFan (?C_STARTUP)
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:05D3H         LINE#         27
-  C:05D3H         LINE#         29
-  C:05D3H         LINE#         33
-  C:05D5H         LINE#         37
-  C:05D7H         LINE#         39
-  C:05D7H         LINE#         41
-  C:05D9H         LINE#         43
-  C:05DDH         LINE#         45
-  C:05E1H         LINE#         47
-  C:05E3H         LINE#         49
-  C:05E7H         LINE#         53
-  C:05E9H         LINE#         55
-  C:05E9H         LINE#         57
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 6
+  C:0621H         LINE#         27
+  C:0621H         LINE#         29
+  C:0621H         LINE#         33
+  C:0623H         LINE#         37
+  C:0625H         LINE#         39
+  C:0625H         LINE#         41
+  C:0627H         LINE#         43
+  C:062BH         LINE#         45
+  C:062FH         LINE#         47
+  C:0631H         LINE#         49
+  C:0635H         LINE#         53
+  C:0637H         LINE#         55
+  C:0637H         LINE#         57
+  C:0639H         LINE#         59
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 6
 
 
-  C:05EBH         LINE#         59
-  C:05EFH         LINE#         61
-  C:05F3H         LINE#         63
-  C:05F5H         LINE#         65
-  C:05F9H         LINE#         67
-  C:05FBH         LINE#         69
+  C:063DH         LINE#         61
+  C:0641H         LINE#         63
+  C:0643H         LINE#         65
+  C:0647H         LINE#         67
+  C:0649H         LINE#         69
   -------         ENDPROC       _WRITE7219
   -------         PROC          LED_INIT
   -------         DO            
   D:0002H         SYMBOL        i
   -------         ENDDO         
-  C:0569H         LINE#         73
-  C:0569H         LINE#         75
-  C:0569H         LINE#         77
-  C:056CH         LINE#         79
-  C:0573H         LINE#         81
-  C:057AH         LINE#         83
-  C:0581H         LINE#         85
-  C:0588H         LINE#         87
-  C:058FH         LINE#         89
-  C:0590H         LINE#         91
-  C:0590H         LINE#         93
-  C:0597H         LINE#         95
-  C:05A2H         LINE#         97
+  C:05B7H         LINE#         73
+  C:05B7H         LINE#         75
+  C:05B7H         LINE#         77
+  C:05BAH         LINE#         79
+  C:05C1H         LINE#         81
+  C:05C8H         LINE#         83
+  C:05CFH         LINE#         85
+  C:05D6H         LINE#         87
+  C:05DDH         LINE#         89
+  C:05DEH         LINE#         91
+  C:05DEH         LINE#         93
+  C:05E5H         LINE#         95
+  C:05F0H         LINE#         97
   -------         ENDPROC       LED_INIT
   -------         PROC          LED_OUT
-  C:045DH         LINE#         99
-  C:045DH         LINE#         100
-  C:046DH         LINE#         101
-  C:047FH         LINE#         102
-  C:0493H         LINE#         103
-  C:04A5H         LINE#         104
-  C:04ACH         LINE#         105
-  C:04B3H         LINE#         106
-  C:04BAH         LINE#         107
+  C:044FH         LINE#         99
+  C:044FH         LINE#         100
+  C:045FH         LINE#         101
+  C:0471H         LINE#         102
+  C:0485H         LINE#         103
+  C:0497H         LINE#         104
+  C:049EH         LINE#         105
+  C:04A5H         LINE#         106
+  C:04ACH         LINE#         107
   -------         ENDPROC       LED_OUT
   -------         PROC          UART_INIT
-  C:0653H         LINE#         6
-  C:0653H         LINE#         8
-  C:0656H         LINE#         9
-  C:0659H         LINE#         10
-  C:065CH         LINE#         11
-  C:065EH         LINE#         12
-  C:0660H         LINE#         13
-  C:0662H         LINE#         14
-  C:0664H         LINE#         15
-  C:0666H         LINE#         16
-  C:0668H         LINE#         17
+  C:06A1H         LINE#         6
+  C:06A1H         LINE#         8
+  C:06A4H         LINE#         9
+  C:06A7H         LINE#         10
+  C:06AAH         LINE#         11
+  C:06ACH         LINE#         12
+  C:06AEH         LINE#         13
+  C:06B0H         LINE#         14
+  C:06B2H         LINE#         15
+  C:06B4H         LINE#         16
+  C:06B6H         LINE#         17
   -------         ENDPROC       UART_INIT
   -------         PROC          _UART_SEND_BYTE
   D:0007H         SYMBOL        dat
-  C:0690H         LINE#         20
-  C:0690H         LINE#         21
-  C:0692H         LINE#         22
-  C:0695H         LINE#         23
-  C:0697H         LINE#         24
+  C:06D0H         LINE#         20
+  C:06D0H         LINE#         21
+  C:06D2H         LINE#         22
+  C:06D5H         LINE#         23
+  C:06D7H         LINE#         24
   -------         ENDPROC       _UART_SEND_BYTE
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 7
-
-
   -------         PROC          _UART_SEND_STRING
-  D:000DH         SYMBOL        buf
-  C:05FCH         LINE#         27
-  C:0602H         LINE#         28
-  C:060DH         LINE#         29
-  C:061EH         LINE#         30
-  C:0620H         LINE#         31
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 7
+
+
+  D:0008H         SYMBOL        buf
+  C:064AH         LINE#         27
+  C:0650H         LINE#         28
+  C:065BH         LINE#         29
+  C:066CH         LINE#         30
+  C:066EH         LINE#         31
   -------         ENDPROC       _UART_SEND_STRING
   -------         PROC          UART
   -------         DO            
   D:000BH         SYMBOL        i
   -------         ENDDO         
   C:0026H         LINE#         35
-  C:0043H         LINE#         36
-  C:0049H         LINE#         37
-  C:004FH         LINE#         38
-  C:0056H         LINE#         39
-  C:005EH         LINE#         40
-  C:0065H         LINE#         41
-  C:0067H         LINE#         42
-  C:006EH         LINE#         43
-  C:0075H         LINE#         44
-  C:007DH         LINE#         45
-  C:007FH         LINE#         46
-  C:0087H         LINE#         47
-  C:008DH         LINE#         48
-  C:008FH         LINE#         50
-  C:0096H         LINE#         51
-  C:00A3H         LINE#         52
-  C:00B0H         LINE#         53
-  C:00BDH         LINE#         54
-  C:00C3H         LINE#         56
-  C:00D2H         LINE#         57
-  C:00D8H         LINE#         58
-  C:00DEH         LINE#         59
-  C:00FEH         LINE#         60
-  C:011CH         LINE#         61
-  C:011CH         LINE#         62
-  C:0125H         LINE#         63
-  C:012BH         LINE#         64
-  C:0140H         LINE#         65
-  C:0140H         LINE#         67
-  C:0145H         LINE#         68
+  C:0039H         LINE#         36
+  C:003FH         LINE#         37
+  C:0045H         LINE#         38
+  C:004CH         LINE#         39
+  C:0057H         LINE#         40
+  C:005FH         LINE#         41
+  C:0066H         LINE#         42
+  C:0068H         LINE#         43
+  C:006FH         LINE#         44
+  C:0076H         LINE#         45
+  C:007EH         LINE#         46
+  C:0080H         LINE#         47
+  C:0088H         LINE#         48
+  C:008EH         LINE#         49
+  C:0090H         LINE#         51
+  C:0097H         LINE#         52
+  C:00A4H         LINE#         53
+  C:00B1H         LINE#         54
+  C:00BEH         LINE#         55
+  C:00C4H         LINE#         57
+  C:00D3H         LINE#         58
+  C:00D9H         LINE#         59
+  C:00DFH         LINE#         60
+  C:00FFH         LINE#         61
+  C:011DH         LINE#         62
+  C:011DH         LINE#         64
+  C:0123H         LINE#         65
+  C:013AH         LINE#         66
+  C:013AH         LINE#         67
+  C:013CH         LINE#         68
+  C:013CH         LINE#         70
+  C:0141H         LINE#         71
   -------         ENDPROC       UART
   -------         PROC          TEST
-  C:0677H         LINE#         70
-  C:0677H         LINE#         71
-  C:0679H         LINE#         72
-  C:0682H         LINE#         73
-  C:0684H         LINE#         74
+  C:04B3H         LINE#         73
+  C:04B3H         LINE#         74
+  C:04B5H         LINE#         75
+  C:04B8H         LINE#         76
+  C:04C8H         LINE#         77
+  C:04D8H         LINE#         78
+  C:04E8H         LINE#         79
+  C:04F8H         LINE#         80
+  C:04FEH         LINE#         81
+  C:0501H         LINE#         82
+  C:0504H         LINE#         83
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 8
+
+
+  C:050CH         LINE#         84
+  C:050EH         LINE#         85
   -------         ENDPROC       TEST
   -------         PROC          TIMER0_INIT
-  C:0685H         LINE#         7
-  C:0685H         LINE#         8
-  C:0688H         LINE#         9
-  C:068BH         LINE#         10
-  C:068DH         LINE#         11
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 8
-
-
-  C:068FH         LINE#         12
+  C:06C5H         LINE#         7
+  C:06C5H         LINE#         8
+  C:06C8H         LINE#         9
+  C:06CBH         LINE#         10
+  C:06CDH         LINE#         11
+  C:06CFH         LINE#         12
   -------         ENDPROC       TIMER0_INIT
   -------         PROC          TIMER0_OVERFLOW
-  C:0333H         LINE#         14
-  C:0333H         LINE#         15
-  C:0339H         LINE#         16
-  C:033BH         LINE#         17
-  C:0343H         LINE#         18
-  C:034CH         LINE#         19
-  C:0350H         LINE#         20
-  C:035CH         LINE#         21
-  C:0371H         LINE#         22
-  C:038DH         LINE#         23
-  C:03AEH         LINE#         24
-  C:03D0H         LINE#         25
-  C:03D0H         LINE#         26
-  C:03D0H         LINE#         27
-  C:03D0H         LINE#         28
+  C:0325H         LINE#         14
+  C:0325H         LINE#         15
+  C:032BH         LINE#         16
+  C:032DH         LINE#         17
+  C:0335H         LINE#         18
+  C:033EH         LINE#         19
+  C:0342H         LINE#         20
+  C:034EH         LINE#         21
+  C:0363H         LINE#         22
+  C:037FH         LINE#         23
+  C:03A0H         LINE#         24
+  C:03C2H         LINE#         25
+  C:03C2H         LINE#         26
+  C:03C2H         LINE#         27
+  C:03C2H         LINE#         28
   -------         ENDPROC       TIMER0_OVERFLOW
   -------         PROC          KEY_SELECT
-  C:0160H         LINE#         8
-  C:0160H         LINE#         9
-  C:0163H         LINE#         10
-  C:016AH         LINE#         11
-  C:0172H         LINE#         12
-  C:017AH         LINE#         15
-  C:017DH         LINE#         16
-  C:0184H         LINE#         17
-  C:0187H         LINE#         18
-  C:018FH         LINE#         19
-  C:019DH         LINE#         20
-  C:01ABH         LINE#         21
-  C:01ABH         LINE#         22
-  C:01B3H         LINE#         25
-  C:01B9H         LINE#         26
-  C:01C0H         LINE#         27
-  C:01C6H         LINE#         29
-  C:01C9H         LINE#         30
-  C:01C9H         LINE#         31
-  C:01CCH         LINE#         32
-  C:01CEH         LINE#         33
-  C:01D0H         LINE#         34
-  C:01D9H         LINE#         36
-  C:01DFH         LINE#         37
-  C:01E2H         LINE#         38
-  C:01E2H         LINE#         39
-  C:01E5H         LINE#         40
-  C:01E7H         LINE#         42
-  C:01EAH         LINE#         43
-  C:01F1H         LINE#         44
-  C:01F4H         LINE#         45
-  C:01FFH         LINE#         46
-  C:0207H         LINE#         47
-  C:020BH         LINE#         48
-  C:0213H         LINE#         49
-  C:0223H         LINE#         50
-  C:0223H         LINE#         51
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 9
+  C:0152H         LINE#         8
+  C:0152H         LINE#         9
+  C:0155H         LINE#         10
+  C:015CH         LINE#         11
+  C:0164H         LINE#         12
+  C:016CH         LINE#         15
+  C:016FH         LINE#         16
+  C:0176H         LINE#         17
+  C:0179H         LINE#         18
+  C:0181H         LINE#         19
+  C:018FH         LINE#         20
+  C:019DH         LINE#         21
+  C:019DH         LINE#         22
+  C:01A5H         LINE#         25
+  C:01ABH         LINE#         26
+  C:01B2H         LINE#         27
+  C:01B8H         LINE#         29
+  C:01BBH         LINE#         30
+  C:01BBH         LINE#         31
+  C:01BEH         LINE#         32
+  C:01C0H         LINE#         33
+  C:01C2H         LINE#         34
+  C:01CBH         LINE#         36
+  C:01D1H         LINE#         37
+  C:01D4H         LINE#         38
+  C:01D4H         LINE#         39
+  C:01D7H         LINE#         40
+  C:01D9H         LINE#         42
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 9
 
 
-  C:0223H         LINE#         52
-  C:0223H         LINE#         54
-  C:0226H         LINE#         55
-  C:022DH         LINE#         56
-  C:0230H         LINE#         57
-  C:023CH         LINE#         58
-  C:0241H         LINE#         59
-  C:0246H         LINE#         60
-  C:0248H         LINE#         61
-  C:024EH         LINE#         62
-  C:0253H         LINE#         63
-  C:025BH         LINE#         64
-  C:025DH         LINE#         65
-  C:0269H         LINE#         66
-  C:0269H         LINE#         67
-  C:0269H         LINE#         69
-  C:026FH         LINE#         70
-  C:0276H         LINE#         71
-  C:027CH         LINE#         72
-  C:027CH         LINE#         73
-  C:027CH         LINE#         75
-  C:027CH         LINE#         76
-  C:027CH         LINE#         77
-  C:027CH         LINE#         78
+  C:01DCH         LINE#         43
+  C:01E3H         LINE#         44
+  C:01E6H         LINE#         45
+  C:01F1H         LINE#         46
+  C:01F9H         LINE#         47
+  C:01FDH         LINE#         48
+  C:0205H         LINE#         49
+  C:0215H         LINE#         50
+  C:0215H         LINE#         51
+  C:0215H         LINE#         52
+  C:0215H         LINE#         54
+  C:0218H         LINE#         55
+  C:021FH         LINE#         56
+  C:0222H         LINE#         57
+  C:022EH         LINE#         58
+  C:0233H         LINE#         59
+  C:0238H         LINE#         60
+  C:023AH         LINE#         61
+  C:0240H         LINE#         62
+  C:0245H         LINE#         63
+  C:024DH         LINE#         64
+  C:024FH         LINE#         65
+  C:025BH         LINE#         66
+  C:025BH         LINE#         67
+  C:025BH         LINE#         69
+  C:0261H         LINE#         70
+  C:0268H         LINE#         71
+  C:026EH         LINE#         72
+  C:026EH         LINE#         73
+  C:026EH         LINE#         75
+  C:026EH         LINE#         76
+  C:026EH         LINE#         77
+  C:026EH         LINE#         78
   -------         ENDPROC       KEY_SELECT
   -------         PROC          MAIN
-  C:0518H         LINE#         11
-  C:0518H         LINE#         12
-  C:051BH         LINE#         13
-  C:051EH         LINE#         14
-  C:0521H         LINE#         15
-  C:0521H         LINE#         16
-  C:0524H         LINE#         17
-  C:0537H         LINE#         18
-  C:0539H         LINE#         19
-  C:053EH         LINE#         20
-  C:0543H         LINE#         21
-  C:0548H         LINE#         22
-  C:054BH         LINE#         23
-  C:054BH         LINE#         24
-  C:054EH         LINE#         25
-  C:0551H         LINE#         26
-  C:0562H         LINE#         27
-  C:0564H         LINE#         28
-  C:0567H         LINE#         30
-  C:0567H         LINE#         32
+  C:0566H         LINE#         11
+  C:0566H         LINE#         12
+  C:0569H         LINE#         13
+  C:056CH         LINE#         14
+  C:056FH         LINE#         15
+  C:056FH         LINE#         16
+  C:0572H         LINE#         17
+  C:0585H         LINE#         18
+  C:0587H         LINE#         19
+  C:058CH         LINE#         20
+  C:0591H         LINE#         21
+  C:0596H         LINE#         22
+  C:0599H         LINE#         23
+  C:0599H         LINE#         24
+  C:059CH         LINE#         25
+  C:059FH         LINE#         26
+  C:05B0H         LINE#         27
+  C:05B2H         LINE#         28
+  C:05B5H         LINE#         30
+  C:05B5H         LINE#         32
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/25/2020  11:43:11  PAGE 10
+
+
 
   -------         MODULE        ?C?CLDPTR
-  C:027DH         PUBLIC        ?C?CLDPTR
+  C:026FH         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
   -------         MODULE        ?C?IMUL
-  C:0296H         PUBLIC        ?C?IMUL
+  C:0288H         PUBLIC        ?C?IMUL
   -------         ENDMOD        ?C?IMUL
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/24/2020  22:04:40  PAGE 10
-
-
   -------         MODULE        ?C?SIDIV
-  C:02A8H         PUBLIC        ?C?SIDIV
+  C:029AH         PUBLIC        ?C?SIDIV
   -------         ENDMOD        ?C?SIDIV
 
   -------         MODULE        ?C?UIDIV
-  C:02DEH         PUBLIC        ?C?UIDIV
+  C:02D0H         PUBLIC        ?C?UIDIV
   -------         ENDMOD        ?C?UIDIV
 
-*** WARNING L15: MULTIPLE CALL TO SEGMENT
-    SEGMENT: ?PR?_UART_SEND_STRING?MAIN
-    CALLER1: ?C_C51STARTUP
-    CALLER2: ?PR?UART?MAIN
-
-Program Size: data=83.1 xdata=0 code=1681
-LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
+Program Size: data=80.1 xdata=0 code=1745
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
