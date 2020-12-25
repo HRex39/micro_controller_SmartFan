@@ -114,8 +114,8 @@ def data_received(thread_name):
     global ser, SERIAL_STATUS
     while True:
         if SERIAL_STATUS == 1:
-            ui.label_10.setText("串口已开启，准备接收")
             try:
+                ui.label_10.setText("串口已开启，准备接收")
                 if ser.in_waiting:
                     data_from_c51 = ser.read(ser.in_waiting).decode("utf-8")
                     sleep(0.02)
@@ -126,8 +126,14 @@ def data_received(thread_name):
                 ui.label_10.setText("ERROR!!!!")
             data_from_c51 = None
         else:
-            ui.label_10.setText("串口未开启，接收失败")
-        ui.LED_LIGHT.display(str(min_stage) + ":" + str(sec_stage))
+           try:
+               ui.label_10.setText("串口未开启，接收失败")
+           except Exception as e:
+               pass
+        try:
+            ui.LED_LIGHT.display(str(min_stage) + ":" + str(sec_stage))
+        except Exception as e:
+            pass
 def serial_open():
     global ser, SERIAL_STATUS
     if SERIAL_STATUS == 0:
@@ -179,6 +185,7 @@ if __name__ == '__main__':
     MainWindow.show()
     # Thread
     Received_Thread = threading.Thread(target=data_received, args=("Received_Thread",))
+    Received_Thread.setDaemon(True)
     Received_Thread.start()
     # Set default num
     ui.comboBox.setCurrentIndex(3)
