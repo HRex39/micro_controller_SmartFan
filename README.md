@@ -6,15 +6,28 @@
 ## 关于串口通讯
 采用特定的数据协议进行解析：  
 ```
-
 [MMSSX]
-
-MM指设定的时钟数，SS指设定的秒钟数，X指风扇的档位，
-"[" 是数据传输的起始位，"]" 是数据传输的停止位。
-
 ```
+MM指设定的时钟数，SS指设定的秒钟数，X指风扇的档位，  
+"[" 是数据传输的起始位，"]" 是数据传输的停止位。  
+  
 ## micro_controller_serial
-
+### Requirements
+Python3    
+PyQt    
+PyQt-tools  
+  
+  
+#### Windows(Linux)    
+```
+pip install PyQt5
+pip install PyQt5-tools
+cd ~/micro_controller_SmartFan/micro_controller_serial
+python3 main.py
+```
 ## micro_controller_c51
-
-
+代码结构：
+```
+|__ main.c
+    |__ 
+```
