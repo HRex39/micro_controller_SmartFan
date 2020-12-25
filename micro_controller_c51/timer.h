@@ -18,7 +18,7 @@ void TIMER0_Overflow(){
 	if (TIME_COUNT == 14) {	 //71ms*14 = 1s
 	  TIME_COUNT = 0;
 	  if (TIME_FLAG  && FAN_FLAG) {
-	    if ( TIME_MIN == 0 && TIME_SEC == 0) { FAN_FLAG = 0; TIME_FLAG = 0; }
+	    if ( TIME_MIN == 0 && TIME_SEC == 0) { FAN_FLAG = 0; TIME_FLAG = 0; TIME_SEC = 99; TIME_MIN = 99; }
 	    else if ( TIME_MIN == 0 && TIME_SEC > 0) { TIME_SEC --; }
 	    else if ( TIME_MIN > 0 && TIME_SEC == 0) { TIME_SEC = 59; TIME_MIN --; }
 	    else if ( TIME_MIN > 0 && TIME_SEC > 0) { TIME_SEC --; }

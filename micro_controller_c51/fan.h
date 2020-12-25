@@ -21,7 +21,7 @@ void fan_stop() {
 void fan_low() {
   P1 = 0x0E;
   IN3 = 1;IN4 = 0;
-  delay(38);
+  delay(50);
   IN3 = 0;IN4 = 0;
   delay(70);
 }
@@ -29,7 +29,7 @@ void fan_low() {
 void fan_mid() {
   P1 = 0x0C;
   IN3 = 1;IN4 = 0;
-  delay(50);
+  delay(70);
   IN3 = 0;IN4 = 0;
   delay(50);
 }

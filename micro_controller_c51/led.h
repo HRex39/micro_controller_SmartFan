@@ -97,10 +97,20 @@ void LED_Init(void)
 }
 
 void led_out() {
-  Write7219(1,TIME_SEC % 10);
-  Write7219(2,TIME_SEC / 10);
-  Write7219(3,TIME_MIN % 10 + 128);
-  Write7219(4,TIME_MIN / 10);
+  if (TIME_SEC == 99 || TIME_MIN == 99) {
+    TIME_SEC = 99;
+	TIME_MIN = 99;
+	Write7219(1,0);
+    Write7219(2,0);
+	Write7219(3,0);
+    Write7219(4,0);  
+  }
+  else {
+    Write7219(1,TIME_SEC % 10);
+    Write7219(2,TIME_SEC / 10);
+    Write7219(3,TIME_MIN % 10 + 128);
+    Write7219(4,TIME_MIN / 10);
+  }
   Write7219(5,15);
   Write7219(6,15);
   Write7219(7,15);

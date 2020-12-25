@@ -34,10 +34,18 @@ void key_select() {
 	  TIME_MIN = 0; TIME_SEC = 0;
 	  //SETTING TIME
 	  while (K3) {
-	    led_out();//TODO:FOR TESTING
+	    led_out();
+
+		//SHINK LIGHT
 	  	L1 = SET_COUNT;L2=!L1;L3=!L2;
+		Write7219(SHUT_DOWN,0x01);
+		delay(500);
+		Write7219(SHUT_DOWN,0x00);
 		delay(500);
 		SET_COUNT = !SET_COUNT;
+		L1 = SET_COUNT;L2=!L1;L3=!L2;
+		//SHINK LIGHT
+
 		//K1: ADD ONCE
 		if (K1 == 0) {
 		  delay(15);
@@ -73,6 +81,7 @@ void key_select() {
 		}
 
 	  }// while K3
+	  Write7219(SHUT_DOWN,0x01);
 	}// K3Ïû¶¶
   }// K3ÅÐ¶¨
 }// key select
