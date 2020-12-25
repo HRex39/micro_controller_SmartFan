@@ -3,6 +3,7 @@
 import re
 import sys
 import threading
+import time
 from time import sleep
 
 from PyQt5.QtCore import QTime
@@ -31,6 +32,9 @@ sec_stage = "00"
 fan_stage = 0
 # Variable ends
 
+def prog_exit():
+    app = QApplication(sys.argv)
+    app.quit()
 def high_speed_set():
     global control_stage
     control_stage = 3
@@ -43,24 +47,29 @@ def low_speed_set():
 def stop_speed_set():
     global control_stage
     control_stage = 0
+    data_send()
 def stop_time_set():
     global time_stage
     time = ui.timeEdit.time().toString()
     time_stage = str(time[3]+time[4]+time[6]+time[7])
 def data_from_c51_set(data):
     global min_stage,sec_stage,fan_stage
-    find_data = re.findall('(?<=!).*?(?=!)',data)
+    pattern = "(?<=\[).*?(?=\])"
+    find_data = re.findall(pattern, data)
     current_stage = int(find_data[-1])
-    if int(current_stage / 100) <= 60:
+    if int(current_stage / 10) <= 6000:
         fan_stage = int(current_stage % 10)
         current_stage = int(current_stage / 10)
         min_stage = int(current_stage / 100)
         sec_stage = int(current_stage % 100)
+        if min_stage < 10:
+            min_stage = "0" + str(min_stage)
+        if sec_stage < 10:
+            sec_stage = "0" +str(sec_stage)
     else:
         fan_stage = int(current_stage % 10)
-        min_stage = 0
-        sec_stage = 0
-
+        min_stage = "00"
+        sec_stage = "00"
     if fan_stage == 0:
         ui.label_13.setText("STOP")
     elif fan_stage == 1:
@@ -69,30 +78,38 @@ def data_from_c51_set(data):
         ui.label_13.setText("MID")
     elif fan_stage == 3:
         ui.label_13.setText("HIGH")
-
-def prog_exit(self):
-    app = QApplication(sys.argv)
-    app.quit()
+    else:
+        ui.label_13.setText("DATA ERROR!")
+def fan_stage_set():
+    global control_stage
+    file = open("fan_stage.txt", "a")
+    if control_stage == 0:
+        line = "["+str(time.ctime())+"]" + "FAN_STAGE: " + "STOP!" + "\n"
+    elif control_stage == 1:
+        line = "["+str(time.ctime())+"]" + "FAN_STAGE: " + "LOW!" + "\n"
+    elif control_stage == 2:
+        line = "["+str(time.ctime())+"]" + "FAN_STAGE: " + "MID!" + "\n"
+    elif control_stage == 3:
+        line = "["+str(time.ctime())+"]" + "FAN_STAGE: " + "HIGH!" + "\n"
+    file.write(line)
+    file.close()
 
 def data_clear():
     ui.textBrowser.clear()
-
 def data_send():
     global ser, SERIAL_STATUS
     if SERIAL_STATUS == 1:
         try:
-            SCS = time_stage + str(control_stage) + "!"
-            print(SCS)
-            ui.label_12.setText(SCS)
+            SCS = "[" + time_stage + str(control_stage) + "]"
             # WRITE
             result = ser.write(SCS.encode("utf-8"))
-            print("写总字节数:", result)
+            print("写总字节数:", result, SCS)
             ui.label_11.setText("连接成功！")
+            fan_stage_set()
         except Exception as e:
             ui.label_11.setText("SEND_ERROR!")
     else:
         ui.label_11.setText("串口未开启，发送失败！")
-
 def data_received(thread_name):
     global ser, SERIAL_STATUS
     while True:
@@ -110,8 +127,7 @@ def data_received(thread_name):
             data_from_c51 = None
         else:
             ui.label_10.setText("串口未开启，接收失败")
-        ui.lcdNumber_3.display(str(min_stage) + ":" + str(sec_stage))
-
+        ui.LED_LIGHT.display(str(min_stage) + ":" + str(sec_stage))
 def serial_open():
     global ser, SERIAL_STATUS
     if SERIAL_STATUS == 0:
@@ -138,23 +154,21 @@ def serial_open():
             # OPEN SERIES
             ser = serial.Serial(port=portx, baudrate=bps, bytesize=num_data,
                                 parity=num_parity_check, stopbits=num_stop, timeout=timex)
-            ui.label_9.setText("已连接上"+portx)
+            ui.serial_now.setText("已连接上" + portx)
             SERIAL_STATUS = 1
         except serial.SerialException:
-            ui.label_9.setText("连接"+portx+"失败")
+            ui.serial_now.setText("连接" + portx + "失败")
             SERIAL_STATUS = 0
         ui.pushButton.setText("关闭串口")
     else:
         try:
             ser.close()
-            ui.label_9.setText("关闭成功")
+            ui.serial_now.setText("关闭成功")
             ui.pushButton.setText("打开串口")
             SERIAL_STATUS = 0
         except Exception as e:
-            ui.label_9.setText("关闭失败")
+            ui.serial_now.setText("关闭失败")
             SERIAL_STATUS = 1
-
-
 
 
 if __name__ == '__main__':
@@ -171,7 +185,7 @@ if __name__ == '__main__':
     ui.comboBox_3.setCurrentIndex(0)
     ui.comboBox_4.setCurrentIndex(3)
     ui.comboBox_5.setCurrentIndex(0)
-    ui.lcdNumber_3.setDigitCount(5)
+    ui.LED_LIGHT.setDigitCount(5)
     # Set Maxium Time
     ui.timeEdit.setDisplayFormat("mm:ss")
     ui.timeEdit.setMinimumTime(QTime(00,00,15))
@@ -185,7 +199,7 @@ if __name__ == '__main__':
     ui.pushButton_3.clicked.connect(mid_speed_set)   #Mid Speed
     ui.pushButton_4.clicked.connect(low_speed_set)   #Low Speed
     ui.pushButton_5.clicked.connect(stop_speed_set)  #Stop
-    ui.pushButton_6.clicked.connect(stop_time_set)
+    ui.time_setting.clicked.connect(stop_time_set)
     ui.pushButton_7.clicked.connect(data_send)
     ui.pushButton_8.clicked.connect(data_clear)
     sys.exit(app.exec_())
