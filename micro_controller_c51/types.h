@@ -20,8 +20,8 @@ sbit L4 = P1^3;
 //Flags
 int FAN_FLAG = 0;
 int TIME_FLAG = 0;
-int TIME_MIN = 0;
-int TIME_SEC = 0;
+int TIME_MIN = 99;
+int TIME_SEC = 99;
 //LED
 sbit DIN   = P2^5;
 sbit LOAD  = P2^6;

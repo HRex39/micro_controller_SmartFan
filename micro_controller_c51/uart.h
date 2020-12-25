@@ -54,7 +54,11 @@ void UART() interrupt 4 {
 	  else if (Received_Buf[5] == '3') FAN_FLAG = 3;
 	  else FAN_FLAG = 0;
 	  //JUDGE TIME
-	  if (Received_Buf[1] >= '6') TIME_FLAG = 0;
+	  if (Received_Buf[1] >= '6') {
+	    TIME_FLAG = 0;
+		TIME_MIN = 99;
+		TIME_SEC = 99;
+	  }
 	  else TIME_FLAG = 1;
 	  if (TIME_FLAG) {
 	    TIME_MIN = (Received_Buf[1] - 0x30) * 10 + (Received_Buf[2]-0x30);
