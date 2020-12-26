@@ -194,10 +194,10 @@ def serial_open():
                                 parity=num_parity_check, stopbits=num_stop, timeout=timex)
             ui.serial_now.setText("已连接上" + portx)
             SERIAL_STATUS = 1
+            ui.pushButton.setText("关闭串口")
         except serial.SerialException:
             ui.serial_now.setText("连接" + portx + "失败")
             SERIAL_STATUS = 0
-        ui.pushButton.setText("关闭串口")
     else:
         try:
             ser.close()
