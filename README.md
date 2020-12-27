@@ -23,6 +23,7 @@ PyQt-tools
 ```
 pip install PyQt5
 pip install PyQt5-tools
+pip install pyserial
 cd ~/micro_controller_SmartFan/micro_controller_serial
 python3 main.py
 ```
@@ -30,6 +31,7 @@ python3 main.py
 ```
 sudo apt-get install python3-pyqt5
 sudo apt-get install qt5-default qttools5-dev-tools
+sudo pip3 install pyserial
 cd ~/micro_controller_SmartFan/micro_controller_serial
 python3 main.py
 ```
