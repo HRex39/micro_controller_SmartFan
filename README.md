@@ -19,10 +19,17 @@ Python3
 PyQt    
 PyQt-tools  
     
-#### Windows(Linux)    
+#### Windows    
 ```
-(sudo)pip install PyQt5
-(sudo)pip install PyQt5-tools
+pip install PyQt5
+pip install PyQt5-tools
+cd ~/micro_controller_SmartFan/micro_controller_serial
+python3 main.py
+```
+#### Linux
+```
+sudo apt-get install python3-pyqt5
+sudo apt-get install qt5-default qttools5-dev-tools
 cd ~/micro_controller_SmartFan/micro_controller_serial
 python3 main.py
 ```
@@ -43,5 +50,5 @@ Keil 4 IDE
 STC-ICP 烧录程序
 CH340 Driver 驱动
 ```
-本人开发用电脑配置：ThinkPad-T480, i5-8250U, Windows10, 16G DDR4 2400, 256G + 1T  
-//Qt跨平台，Linux也可以用Wine来解决，故实际应该都可以运行
+### About Keil in Linux
+https://blog.csdn.net/best_xiaolong/article/details/88801656
