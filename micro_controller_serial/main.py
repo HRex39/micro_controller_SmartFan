@@ -157,6 +157,7 @@ def data_received(thread_name):
         else:
            try:
                ui.label_10.setText("串口未开启")
+               sleep(0.2)
            except Exception as e:
                pass
         try:
